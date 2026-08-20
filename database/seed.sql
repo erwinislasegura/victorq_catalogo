@@ -1,17 +1,31 @@
 -- ==========================================================
 -- DATOS INICIALES / SEED DATA PARA VICTORQ
+-- Compatible con MySQL 5.7+, 8.0+ y MariaDB (Sin error 1701)
 -- ==========================================================
 
 SET FOREIGN_KEY_CHECKS = 0;
-TRUNCATE TABLE `role_permissions`;
-TRUNCATE TABLE `users`;
-TRUNCATE TABLE `roles`;
-TRUNCATE TABLE `menus`;
-TRUNCATE TABLE `products`;
-TRUNCATE TABLE `categories`;
-TRUNCATE TABLE `technical_tables`;
-TRUNCATE TABLE `quotes`;
-TRUNCATE TABLE `activity_logs`;
+
+-- Limpieza segura de tablas (DELETE evita error 1701 de TRUNCATE)
+DELETE FROM `activity_logs`;
+DELETE FROM `quotes`;
+DELETE FROM `technical_tables`;
+DELETE FROM `products`;
+DELETE FROM `categories`;
+DELETE FROM `role_permissions`;
+DELETE FROM `menus`;
+DELETE FROM `users`;
+DELETE FROM `roles`;
+
+-- Resetear autoincrementables
+ALTER TABLE `roles` AUTO_INCREMENT = 1;
+ALTER TABLE `users` AUTO_INCREMENT = 1;
+ALTER TABLE `menus` AUTO_INCREMENT = 1;
+ALTER TABLE `role_permissions` AUTO_INCREMENT = 1;
+ALTER TABLE `categories` AUTO_INCREMENT = 1;
+ALTER TABLE `products` AUTO_INCREMENT = 1;
+ALTER TABLE `technical_tables` AUTO_INCREMENT = 1;
+ALTER TABLE `quotes` AUTO_INCREMENT = 1;
+ALTER TABLE `activity_logs` AUTO_INCREMENT = 1;
 
 -- 1. Roles
 INSERT INTO `roles` (`id`, `name`, `slug`, `description`, `is_system`) VALUES
@@ -43,12 +57,12 @@ INSERT INTO `role_permissions` (`role_id`, `menu_id`, `can_view`, `can_create`, 
 -- Operador (Dashboard, Productos y Tablas solo lectura)
 (4, 1, 1, 0, 0, 0), (4, 2, 1, 0, 0, 0), (4, 3, 0, 0, 0, 0), (4, 4, 0, 0, 0, 0), (4, 5, 1, 0, 0, 0), (4, 6, 0, 0, 0, 0), (4, 7, 0, 0, 0, 0), (4, 8, 0, 0, 0, 0), (4, 9, 1, 0, 0, 0);
 
--- 4. Usuarios Iniciales (Password por defecto: password123)
+-- 4. Usuarios Iniciales (Password: password123)
 INSERT INTO `users` (`id`, `role_id`, `name`, `email`, `password`, `phone`, `is_active`) VALUES
-(1, 1, 'Carlos Valenzuela (Admin)', 'admin@victorq.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '+56 9 7140 1455', 1),
-(2, 2, 'Marcela Rojas (Supervisor)', 'supervisor@victorq.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '+56 9 8234 5678', 1),
-(3, 3, 'Rodrigo Soto (Ventas)', 'ventas@victorq.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '+56 9 9123 4567', 1),
-(4, 4, 'Andrés Morales (Operador)', 'operador@victorq.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '+56 9 7890 1234', 1);
+(1, 1, 'Carlos Valenzuela (Admin)', 'admin@victorq.com', '$2y$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', '+56 9 7140 1455', 1),
+(2, 2, 'Marcela Rojas (Supervisor)', 'supervisor@victorq.com', '$2y$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', '+56 9 8234 5678', 1),
+(3, 3, 'Rodrigo Soto (Ventas)', 'ventas@victorq.com', '$2y$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', '+56 9 9123 4567', 1),
+(4, 4, 'Andrés Morales (Operador)', 'operador@victorq.com', '$2y$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36WQoeG6Lruj3vjPGga31lW', '+56 9 7890 1234', 1);
 
 -- 5. Categorías de Productos
 INSERT INTO `categories` (`id`, `slug`, `name`, `description`, `icon`, `sort_order`, `is_active`) VALUES
@@ -63,8 +77,8 @@ INSERT INTO `categories` (`id`, `slug`, `name`, `description`, `icon`, `sort_ord
 (9, 'accesorios', 'Accesorios', 'Acoples rápidos antigoteo, manómetros certificados y mangueras hidráulicas de 700 bar.', 'bi-sliders', 9, 1);
 
 -- 6. Productos del Catálogo
-INSERT INTO  (uid=501(eisla) gid=20(staff) groups=20(staff),12(everyone),61(localaccounts),79(_appserverusr),80(admin),81(_appserveradm),98(_lpadmin),701(com.apple.sharepoint.group.1),33(_appstore),100(_lpoperator),204(_developer),250(_analyticsusers),395(com.apple.access_ftp),398(com.apple.access_screensharing),399(com.apple.access_ssh),400(com.apple.access_remote_ae), , , , , , , , , ) VALUES
-(1, 1, 'Serie MXTA', 'Llave de Torque Hidráulica de Cuadrante', 'Llave de Torque Hidráulica de Cuadrante de alta eficiencia industrial VICTORQ, modelo Serie MXTA.', 'prod_01_llaves.png', '{"Detalle": "{'Torque':'200 \u2013 37.000 Lb-ple','Cuadrante':'3/4\" a 2-1/2\"','Presi\u00f3n':'700 bar','Modelos':'1,3,5,8,10,20,25,35 MXTA'}"}', 1, 1, 1),
+INSERT INTO `products` (`id`, `category_id`, `model`, `name`, `description`, `image`, `specs_json`, `sort_order`, `is_featured`, `is_active`) VALUES
+(1, 1, 'Serie MXTA', 'Llave de Torque Hidráulica de Cuadrante', 'Llave de Torque Hidráulica de Cuadrante de alta eficiencia industrial VICTORQ, modelo Serie MXTA.', 'prod_01_llaves.png', '{"Torque":"200 – 37.000 Lb-ple","Cuadrante":"3/4\\" a 2-1/2\\"","Presión":"700 bar","Modelos":"1,3,5,8,10,20,25,35 MXTA"}', 1, 1, 1),
 (2, 1, 'Serie XLCTA (LOW)', 'Llave de Torque Bajo Perfil / Hueca', 'Llave de Torque Bajo Perfil / Hueca de alta eficiencia industrial VICTORQ, modelo Serie XLCTA (LOW).', 'prod_02_llaves.png', '{"Torque":"130 – 30.190 Lb-ple","Hexágono":"19 – 175 mm","Modelos":"2,4,8,14,30 XLCTA","Accesorios":"Ratchet intercambiable"}', 2, 1, 1),
 (3, 1, 'Serie VIC', 'Llave de Torque Hidráulica de Cuadrante (Square Drive)', 'Llave de Torque Hidráulica de Cuadrante (Square Drive) de alta eficiencia industrial VICTORQ, modelo Serie VIC.', 'prod_03_llaves.png', '{"Modelos":"VIC1 a VIC50","Encastre":"Cuadrado","Ficha técnica":"Consultar rango de torque exacto"}', 3, 1, 1),
 (4, 1, 'Serie TORQ', 'Llave de Torque Hidráulica de Bajo Perfil (Low Profile)', 'Llave de Torque Hidráulica de Bajo Perfil (Low Profile) de alta eficiencia industrial VICTORQ, modelo Serie TORQ.', 'prod_04_llaves.png', '{"Modelos":"TORQ2 a TORQ30 (+variantes -50/-65/-90/-115/-135/-155)","Ficha técnica":"Consultar rango de torque exacto"}', 4, 1, 1),
@@ -86,30 +100,30 @@ INSERT INTO  (uid=501(eisla) gid=20(staff) groups=20(staff),12(everyone),61(loca
 (20, 7, 'Gear Pusher', 'Extractor Hidráulico de Tres Patas', 'Extractor Hidráulico de Tres Patas de alta eficiencia industrial VICTORQ, modelo Gear Pusher.', 'prod_20_extractores.png', '{"Tipo":"Hidráulico / mecánico de cruceta","Uso":"Rodamientos, poleas, engranajes"}', 20, 1, 1),
 (21, 7, 'Extractor Autocentrante', 'Extractor Mecánico Autocentrante', 'Extractor Mecánico Autocentrante de alta eficiencia industrial VICTORQ, modelo Extractor Autocentrante.', 'prod_21_extractores.png', '{"Tipo":"Mecánico, 2 o 3 brazos","Uso":"Desmontaje sin dañar el eje"}', 21, 1, 1),
 (22, 8, 'Serie H', 'Prensa Hidráulica de Taller', 'Prensa Hidráulica de Taller de alta eficiencia industrial VICTORQ, modelo Serie H.', 'prod_22_prensas.png', '{"Capacidad":"10 – 200 ton","Luz máx. x ancho":"1.384 x 1.219 mm","Presión máx.":"700 bar"}', 22, 1, 1),
-(23, 9, 'C604 / CT901', 'Acople Rápido Antigoteo', 'Acople Rápido Antigoteo de alta eficiencia industrial VICTORQ, modelo C604 / CT901.', 'prod_23_accesorios.png', '{"Detalle": "{'Rosca':'1/4\" \u2013 3/8\" NPT','Presi\u00f3n m\u00e1x.':'700 bar'}"}', 23, 1, 1),
+(23, 9, 'C604 / CT901', 'Acople Rápido Antigoteo', 'Acople Rápido Antigoteo de alta eficiencia industrial VICTORQ, modelo C604 / CT901.', 'prod_23_accesorios.png', '{"Rosca":"1/4\\" – 3/8\\" NPT","Presión máx.":"700 bar"}', 23, 1, 1),
 (24, 9, 'HG-63-70 / HG-100-70', 'Manómetro Hidráulico', 'Manómetro Hidráulico de alta eficiencia industrial VICTORQ, modelo HG-63-70 / HG-100-70.', 'prod_24_accesorios.png', '{"Diámetro":"63 / 100 mm","Rango":"0 – 700 bar"}', 24, 1, 1);
 
 -- 7. Tablas Técnicas
-INSERT INTO  (uid=501(eisla) gid=20(staff) groups=20(staff),12(everyone),61(localaccounts),79(_appserverusr),80(admin),81(_appserveradm),98(_lpadmin),701(com.apple.sharepoint.group.1),33(_appstore),100(_lpoperator),204(_developer),250(_analyticsusers),395(com.apple.access_ftp),398(com.apple.access_screensharing),399(com.apple.access_ssh),400(com.apple.access_remote_ae), , , , , , , ) VALUES
-(1, 'Serie MXTA — Llaves de Torque Hidráulicas de Cuadrante', '', '["<tr><th>Modelo", "Torque mín. (Lb-ple)", "Torque máx. (Lb-ple)", "Cuadrante", "Peso (kg)"]', '[["1 MXTA", "200", "1.390", "3/4\"", "2"], ["3 MXTA", "480", "3.280", "1\"", "2"], ["5 MXTA", "835", "5.590", "1-1/2\"", "7"], ["8 MXTA", "800", "8.000", "1-1/2\"", "91*"], ["10 MXTA", "1.755", "11.520", "1-1/2\"", "131*"], ["20 MXTA", "2.960", "19.760", "2-1/2\"", "25"], ["25 MXTA", "3.960", "25.890", "2-1/2\"", "31"], ["35 MXTA", "4.800", "37.000", "2-1/2\"", "45"]]', '', 1, 1),
-(2, 'Serie XLCTA (LOW) — Llaves de Bajo Perfil / Hexágono Hueco', '', '["<tr><th>Modelo", "Torque mín. (Lb-ple)", "Torque máx. (Lb-ple)", "Hexágono (mm)", "Peso módulo (kg)", "Peso hexágono (kg)"]', '[["2 XLCTA", "130", "1.367", "19 – 60", "9", "15"], ["4 XLCTA", "320", "3.930", "25 – 80", "17", "34"], ["8 XLCTA", "650", "7.500", "41 – 105", "30", "63"], ["14 XLCA", "1.150", "13.020", "50 – 117", "46", "114"], ["30 XLCTA", "2.600", "30.190", "80 – 175", "104", "205"]]', '', 2, 1),
-(3, 'Serie VIC / TORQ — Modelos por Capacidad', '', '["<tr><th>Serie VIC (cuadrante)", "Serie TORQ (bajo perfil)"]', '[["VIC 1", "TORQ 2 / TORQ 2-50"], ["VIC 3", "TORQ 4 / TORQ 4-65"], ["VIC 5", "TORQ 8 / TORQ 8-90"], ["VIC 8", "TORQ 14 / TORQ 14-115"], ["VIC 10", "TORQ 18 / TORQ 18-135"], ["VIC 15", "TORQ 30 / TORQ 30-155"], ["VIC 20 / VIC 25 / VIC 35 / VIC 50", "—"]]', '', 3, 1),
-(4, 'Bomba Eléctrica / Neumática para Llave de Torque (TWP)', '', '["<tr><th>Parámetro", "Valor"]', '[["Caudal de aceite a 700 bar", "0,8 L/min"], ["Caudal de aceite a 300 bar", "1,6 L/min"], ["Caudal de aceite a 70 bar", "8 L/min"], ["Capacidad de estanque", "7,6 L"], ["Rango de presión de aire (versión neumática)", "4 – 8 bar"], ["Peso", "21 kg"]]', '', 4, 1),
-(5, 'Bomba Electrohidráulica VICTORQ', '', '["<tr><th>Característica", "Detalle"]', '[["Acoples", "Autotrabantes antigoteo"], ["Enfriamiento", "Radiador"], ["Válvula de alivio", "Sí, regulable"], ["Motor", "Sin carbones ni tarjeta electrónica"], ["Manómetro", "Certificado"], ["Manguera", "6 metros"]]', '', 5, 1),
+INSERT INTO `technical_tables` (`id`, `title`, `subtitle`, `headers_json`, `rows_json`, `note`, `sort_order`, `is_active`) VALUES
+(1, 'Serie MXTA — Llaves de Torque Hidráulicas de Cuadrante', '', '["Modelo", "Torque mín. (Lb-ple)", "Torque máx. (Lb-ple)", "Cuadrante", "Peso (kg)"]', '[["1 MXTA", "200", "1.390", "3/4\"", "2"], ["3 MXTA", "480", "3.280", "1\"", "2"], ["5 MXTA", "835", "5.590", "1-1/2\"", "7"], ["8 MXTA", "800", "8.000", "1-1/2\"", "91*"], ["10 MXTA", "1.755", "11.520", "1-1/2\"", "131*"], ["20 MXTA", "2.960", "19.760", "2-1/2\"", "25"], ["25 MXTA", "3.960", "25.890", "2-1/2\"", "31"], ["35 MXTA", "4.800", "37.000", "2-1/2\"", "45"]]', '', 1, 1),
+(2, 'Serie XLCTA (LOW) — Llaves de Bajo Perfil / Hexágono Hueco', '', '["Modelo", "Torque mín. (Lb-ple)", "Torque máx. (Lb-ple)", "Hexágono (mm)", "Peso módulo (kg)", "Peso hexágono (kg)"]', '[["2 XLCTA", "130", "1.367", "19 – 60", "9", "15"], ["4 XLCTA", "320", "3.930", "25 – 80", "17", "34"], ["8 XLCTA", "650", "7.500", "41 – 105", "30", "63"], ["14 XLCA", "1.150", "13.020", "50 – 117", "46", "114"], ["30 XLCTA", "2.600", "30.190", "80 – 175", "104", "205"]]', '', 2, 1),
+(3, 'Serie VIC / TORQ — Modelos por Capacidad', '', '["Serie VIC (cuadrante)", "Serie TORQ (bajo perfil)"]', '[["VIC 1", "TORQ 2 / TORQ 2-50"], ["VIC 3", "TORQ 4 / TORQ 4-65"], ["VIC 5", "TORQ 8 / TORQ 8-90"], ["VIC 8", "TORQ 14 / TORQ 14-115"], ["VIC 10", "TORQ 18 / TORQ 18-135"], ["VIC 15", "TORQ 30 / TORQ 30-155"], ["VIC 20 / VIC 25 / VIC 35 / VIC 50", "—"]]', '', 3, 1),
+(4, 'Bomba Eléctrica / Neumática para Llave de Torque (TWP)', '', '["Parámetro", "Valor"]', '[["Caudal de aceite a 700 bar", "0,8 L/min"], ["Caudal de aceite a 300 bar", "1,6 L/min"], ["Caudal de aceite a 70 bar", "8 L/min"], ["Capacidad de estanque", "7,6 L"], ["Rango de presión de aire (versión neumática)", "4 – 8 bar"], ["Peso", "21 kg"]]', '', 4, 1),
+(5, 'Bomba Electrohidráulica VICTORQ', '', '["Característica", "Detalle"]', '[["Acoples", "Autotrabantes antigoteo"], ["Enfriamiento", "Radiador"], ["Válvula de alivio", "Sí, regulable"], ["Motor", "Sin carbones ni tarjeta electrónica"], ["Manómetro", "Certificado"], ["Manguera", "6 metros"]]', '', 5, 1),
 (6, 'Bomba Eléctrica (Series MD / MS / SS / SD)', '', '[]', '[]', '', 6, 1),
-(7, 'Serie CLSG — Cilindro de Alta Tonelada', '', '["<tr><th>Modelo", "Capacidad", "Carrera", "Área efectiva", "Cap. de aceite", "Altura colapsada", "Peso"]', '[["CLSG-502", "50 ton / 539 kN", "50 mm", "77,0 cm²", "385 cm³", "162 mm", "17 kg"], ["CLSG-100012", "1.000 ton / 10.260 kN", "300 mm", "1.465,7 cm²", "43.972 cm³", "814 mm", "1.439 kg"]]', '', 7, 1),
-(8, 'Cilindro Telescópico (TC)', '', '["<tr><th>Modelo", "Capacidad", "Etapas"]', '[["TC10-2 / TC10-3", "10 ton", "2 / 3"], ["TC15-2 / TC15-3", "15 ton", "2 / 3"], ["TC30-2 / TC30-3", "30 ton", "2 / 3"]]', '', 8, 1),
-(9, 'Serie RAC — Cilindro de Aluminio de Simple Efecto', '', '["<tr><th>Modelo", "Capacidad", "Área efectiva", "Cap. de aceite", "Altura", "Diám. exterior", "Peso"]', '[["RAC-502", "50 ton / 496 kN", "70,9 cm²", "354 cm³", "186 mm", "130 mm", "8,5 kg"]]', '', 9, 1),
-(10, 'RC / RCH / BRC-BRP — Otras Series de Cilindro', '', '["<tr><th>Serie", "Descripción"]', '[["RC", "Cilindro de simple efecto de propósito general"], ["RCH", "Cilindro de émbolo hueco (Hollow Plunger)"], ["BRC / BRP", "Cilindro tensor (Pulling Cylinder), uso combinado con bombas serie TORQ"]]', '', 10, 1),
+(7, 'Serie CLSG — Cilindro de Alta Tonelada', '', '["Modelo", "Capacidad", "Carrera", "Área efectiva", "Cap. de aceite", "Altura colapsada", "Peso"]', '[["CLSG-502", "50 ton / 539 kN", "50 mm", "77,0 cm²", "385 cm³", "162 mm", "17 kg"], ["CLSG-100012", "1.000 ton / 10.260 kN", "300 mm", "1.465,7 cm²", "43.972 cm³", "814 mm", "1.439 kg"]]', '', 7, 1),
+(8, 'Cilindro Telescópico (TC)', '', '["Modelo", "Capacidad", "Etapas"]', '[["TC10-2 / TC10-3", "10 ton", "2 / 3"], ["TC15-2 / TC15-3", "15 ton", "2 / 3"], ["TC30-2 / TC30-3", "30 ton", "2 / 3"]]', '', 8, 1),
+(9, 'Serie RAC — Cilindro de Aluminio de Simple Efecto', '', '["Modelo", "Capacidad", "Área efectiva", "Cap. de aceite", "Altura", "Diám. exterior", "Peso"]', '[["RAC-502", "50 ton / 496 kN", "70,9 cm²", "354 cm³", "186 mm", "130 mm", "8,5 kg"]]', '', 9, 1),
+(10, 'RC / RCH / BRC-BRP — Otras Series de Cilindro', '', '["Serie", "Descripción"]', '[["RC", "Cilindro de simple efecto de propósito general"], ["RCH", "Cilindro de émbolo hueco (Hollow Plunger)"], ["BRC / BRP", "Cilindro tensor (Pulling Cylinder), uso combinado con bombas serie TORQ"]]', '', 10, 1),
 (11, 'Multiplicador de Torque Manual (Manual Torque Multiplier)', '', '[]', '[]', '', 11, 1),
-(12, 'Separador de Bridas 24 Ton — FSW25TE / FSW25TI', '', '["<tr><th>Modelo", "Tipo", "Presión de trabajo"]', '[["FSW25TE", "Externo", "700 bar"], ["FSW25TI", "Integral", "700 bar"]]', '', 12, 1),
-(13, 'Separador de Bridas — Cabezales FSM-8 / FSH-14', '', '["<tr><th>Modelo", "Fuerza máxima aprox."]', '[["FSM-8", "8 ton"], ["FSH-14", "14 ton"]]', '', 13, 1),
-(14, 'Alineador de Bridas (Flange Alignment Tool)', '', '["<tr><th>Modelo"]', '[["FA-1TM"], ["FA-4TM"], ["FA-9TM"], ["FA-9TE"]]', '', 14, 1),
-(15, 'Corta Tuercas Hidráulico — Integral (HNS) y Doble Efecto (DNS)', '', '["<tr><th>Modelo", "Hexágono", "Perno / Espárrago", "Peso"]', '[["HNS2432", "17 – 32 mm (11/16 – 1 1/4\")", "M10 – M22 (1/2 – 3/4\")", "5 kg"], ["HNS3241", "32 – 41 mm (1 1/4 – 1 5/8\")", "M22 – M27 (3/4 – 1\")", "7 kg"], ["HNS4150", "41 – 50 mm (1 5/8 – 2\")", "M27 – M33 (1 – 1 1/4\")", "11 kg"], ["DNS75105", "75 – 105 mm (2 15/16 – 4 1/4\")", "M48 – M72", "51 kg"], ["DNS105135", "105 – 135 mm (4 1/4 – 5 3/8\")", "M72 – M95", "98 kg"]]', '', 15, 1),
-(16, 'Extractores — Familia Completa', '', '["<tr><th>Modelo / Tipo", "Descripción"]', '[["Gear Pusher", "Extractor hidráulico de tres patas"], ["Extractor de cruceta", "Extractor mecánico de cruceta"], ["Integral Puller / Cobra Puller", "Extractor mecánico integral, mordazas autocentrantes"], ["YL-Series", "Extractor hidráulico de tres garras (split)"], ["Extractor autocentrante", "Mecánico, dos o tres brazos"], ["Extractor hidráulico separado", "Separated Hydraulic Puller"]]', '', 16, 1),
-(17, 'Prensa Hidráulica de Taller Serie H', '', '["<tr><th>Capacidad", "Modelos asociados"]', '[["10 ton", "IPE-1215 / IPH-1240 / IPH-1234"], ["25 ton", "IPE-2505 / IPE-2510 / IPH-2531"], ["30 ton", "IPE-3060 / IPH-3080"], ["50 ton", "IPE-5010 / IPH-5030 / IPH-5031 / IPE-5005 / IPE-5060 / IPH-5080"], ["100 ton", "IPE-10010 / IPH-10030 / IPE-10060 / IPH-10080"], ["150 ton", "IPE-15065"], ["200 ton", "IPE-20065"]]', '', 17, 1),
-(18, 'Acople Rápido Antigoteo (Quick Coupling)', '', '["<tr><th>Modelo", "Hembra", "Macho", "Rosca"]', '[["C604", "CR604", "CH604", "3/8\" NPT"], ["CT901", "C901", "T901", "1/4\" NPT"]]', '', 18, 1),
-(19, 'Manómetro Hidráulico (Hydraulic Gauge)', '', '["<tr><th>Modelo", "Diámetro", "Rosca", "Rango de presión"]', '[["HG-63-70", "63 mm", "NPT 1/4\"", "0 – 700 bar"], ["HG-100-70", "100 mm", "G 1/2", "0 – 700 bar"]]', '', 19, 1);
+(12, 'Separador de Bridas 24 Ton — FSW25TE / FSW25TI', '', '["Modelo", "Tipo", "Presión de trabajo"]', '[["FSW25TE", "Externo", "700 bar"], ["FSW25TI", "Integral", "700 bar"]]', '', 12, 1),
+(13, 'Separador de Bridas — Cabezales FSM-8 / FSH-14', '', '["Modelo", "Fuerza máxima aprox."]', '[["FSM-8", "8 ton"], ["FSH-14", "14 ton"]]', '', 13, 1),
+(14, 'Alineador de Bridas (Flange Alignment Tool)', '', '["Modelo"]', '[["FA-1TM"], ["FA-4TM"], ["FA-9TM"], ["FA-9TE"]]', '', 14, 1),
+(15, 'Corta Tuercas Hidráulico — Integral (HNS) y Doble Efecto (DNS)', '', '["Modelo", "Hexágono", "Perno / Espárrago", "Peso"]', '[["HNS2432", "17 – 32 mm (11/16 – 1 1/4\")", "M10 – M22 (1/2 – 3/4\")", "5 kg"], ["HNS3241", "32 – 41 mm (1 1/4 – 1 5/8\")", "M22 – M27 (3/4 – 1\")", "7 kg"], ["HNS4150", "41 – 50 mm (1 5/8 – 2\")", "M27 – M33 (1 – 1 1/4\")", "11 kg"], ["DNS75105", "75 – 105 mm (2 15/16 – 4 1/4\")", "M48 – M72", "51 kg"], ["DNS105135", "105 – 135 mm (4 1/4 – 5 3/8\")", "M72 – M95", "98 kg"]]', '', 15, 1),
+(16, 'Extractores — Familia Completa', '', '["Modelo / Tipo", "Descripción"]', '[["Gear Pusher", "Extractor hidráulico de tres patas"], ["Extractor de cruceta", "Extractor mecánico de cruceta"], ["Integral Puller / Cobra Puller", "Extractor mecánico integral, mordazas autocentrantes"], ["YL-Series", "Extractor hidráulico de tres garras (split)"], ["Extractor autocentrante", "Mecánico, dos o tres brazos"], ["Extractor hidráulico separado", "Separated Hydraulic Puller"]]', '', 16, 1),
+(17, 'Prensa Hidráulica de Taller Serie H', '', '["Capacidad", "Modelos asociados"]', '[["10 ton", "IPE-1215 / IPH-1240 / IPH-1234"], ["25 ton", "IPE-2505 / IPE-2510 / IPH-2531"], ["30 ton", "IPE-3060 / IPH-3080"], ["50 ton", "IPE-5010 / IPH-5030 / IPH-5031 / IPE-5005 / IPE-5060 / IPH-5080"], ["100 ton", "IPE-10010 / IPH-10030 / IPE-10060 / IPH-10080"], ["150 ton", "IPE-15065"], ["200 ton", "IPE-20065"]]', '', 17, 1),
+(18, 'Acople Rápido Antigoteo (Quick Coupling)', '', '["Modelo", "Hembra", "Macho", "Rosca"]', '[["C604", "CR604", "CH604", "3/8\" NPT"], ["CT901", "C901", "T901", "1/4\" NPT"]]', '', 18, 1),
+(19, 'Manómetro Hidráulico (Hydraulic Gauge)', '', '["Modelo", "Diámetro", "Rosca", "Rango de presión"]', '[["HG-63-70", "63 mm", "NPT 1/4\"", "0 – 700 bar"], ["HG-100-70", "100 mm", "G 1/2", "0 – 700 bar"]]', '', 19, 1);
 
 -- 8. Cotizaciones de Ejemplo
 INSERT INTO `quotes` (`id`, `product_id`, `client_name`, `client_email`, `client_phone`, `company`, `product_interest`, `message`, `status`, `admin_notes`, `created_at`) VALUES

@@ -1,0 +1,952 @@
+/**
+ * VICTORQ Industrial - Catálogo Público Web
+ * Paleta Oficial Corporativa VICTORQ (#015B91, #0A1118, #00A3E0)
+ * Geometría industrial rectangular rigurosa (border-radius: 0), alta densidad y fotografías reales de maquinaria.
+ */
+
+:root {
+  /* Paleta Corporativa Oficial del Logo VICTORQ */
+  --vq-blue: #015B91;
+  --vq-blue-dark: #013f66;
+  --vq-blue-hover: #026aa6;
+  --vq-blue-light: #e8f4fc;
+  --vq-cyan: #00A3E0;
+  --vq-cyan-light: #38bdf8;
+  --vq-dark: #0a1118;
+  --vq-dark-navy: #101a24;
+  --vq-navy-panel: #162433;
+  --vq-gray-bg: #f4f6f8;
+  --vq-gray-light: #f8fafc;
+  --vq-border: #d1d5db;
+  --vq-border-dark: #243447;
+  --vq-text-main: #1f2937;
+  --vq-text-muted: #4b5563;
+  --vq-text-subtle: #6b7280;
+}
+
+* { 
+  box-sizing: border-box; 
+  border-radius: 0 !important; /* Estilo industrial riguroso: Cero bordes redondeados */
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: #ffffff;
+  color: var(--vq-text-main);
+  line-height: 1.6;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+img { max-width: 100%; display: block; }
+
+/* Tipografía de Títulos */
+h1, h2, h3, h4, h5, h6 { 
+  margin: 0 0 0.5rem 0; 
+  font-family: 'Montserrat', sans-serif; 
+  font-weight: 800; 
+  letter-spacing: -0.01em; 
+  color: #0a1118;
+}
+
+p { margin: 0 0 1rem 0; }
+
+.contenedor {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* VICTORQ Blue Top Accent Stripe */
+.top-stripe-enerpac,
+.top-stripe-victorq {
+  height: 4px;
+  background: linear-gradient(90deg, var(--vq-blue) 0%, var(--vq-cyan) 100%);
+  width: 100%;
+}
+
+/* ==========================================================================
+   BUTTONS (Industrial Sharp Style)
+   ========================================================================== */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+  font-size: 0.82rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.btn-enerpac-yellow,
+.btn-victorq-primary {
+  background: var(--vq-blue);
+  color: #ffffff;
+  border-color: var(--vq-blue-dark);
+}
+.btn-enerpac-yellow:hover,
+.btn-victorq-primary:hover {
+  background: var(--vq-dark);
+  color: #ffffff;
+  border-color: var(--vq-dark);
+}
+
+.btn-enerpac-black,
+.btn-victorq-dark {
+  background: var(--vq-dark);
+  color: #ffffff;
+  border-color: var(--vq-dark);
+}
+.btn-enerpac-black:hover,
+.btn-victorq-dark:hover {
+  background: var(--vq-blue);
+  color: #ffffff;
+  border-color: var(--vq-blue-dark);
+}
+
+.btn-enerpac-outline-white,
+.btn-victorq-outline-white {
+  background: rgba(10, 17, 24, 0.6);
+  border: 2px solid #ffffff;
+  color: #ffffff;
+}
+.btn-enerpac-outline-white:hover,
+.btn-victorq-outline-white:hover {
+  background: #ffffff;
+  color: var(--vq-blue);
+  border-color: #ffffff;
+}
+
+/* ==========================================================================
+   HEADER & NAVIGATION (VICTORQ Corporate Style)
+   ========================================================================== */
+header.header-enerpac {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #ffffff;
+  border-bottom: 2px solid var(--vq-blue);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.top-utility-bar {
+  background: var(--vq-dark);
+  color: #cbd5e1;
+  font-size: 0.74rem;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.top-utility-bar .contenedor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.top-utility-bar span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 18px;
+}
+.top-utility-bar span i { color: var(--vq-cyan); }
+
+.link-backend-top {
+  background: var(--vq-blue);
+  color: #ffffff;
+  padding: 3px 12px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--vq-blue-dark);
+  transition: all 0.15s;
+}
+.link-backend-top:hover {
+  background: #ffffff;
+  color: var(--vq-blue);
+  border-color: #ffffff;
+}
+
+/* Main Navbar */
+.navbar-enerpac {
+  padding: 12px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.brand-box {
+  display: flex;
+  align-items: center;
+}
+.brand-box img { height: 44px; width: auto; object-fit: contain; }
+
+.nav-menu-list {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-menu-list a {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--vq-dark);
+  padding: 8px 0;
+  border-bottom: 3px solid transparent;
+  transition: all 0.15s;
+}
+.nav-menu-list a:hover {
+  color: var(--vq-blue);
+  border-color: var(--vq-blue);
+}
+
+.nav-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  background: #f4f6f8;
+  border: 1px solid #cdd2d6;
+  padding: 6px 10px;
+  min-width: 220px;
+}
+.search-input-wrapper:focus-within {
+  background: #ffffff;
+  border-color: var(--vq-blue);
+}
+.search-input-wrapper input {
+  background: transparent;
+  border: none;
+  color: #000000;
+  font-size: 0.82rem;
+  outline: none;
+  width: 100%;
+  margin-left: 6px;
+}
+.search-input-wrapper i { color: var(--vq-blue); }
+
+/* ==========================================================================
+   HERO BANNER (Realistic Industrial Photo Background)
+   ========================================================================== */
+.hero-enerpac-photo {
+  position: relative;
+  background-color: #0a1118;
+  background-image: linear-gradient(to right, rgba(10, 17, 24, 0.95) 0%, rgba(10, 17, 24, 0.82) 55%, rgba(10, 17, 24, 0.45) 100%), url('../img/banners/hero_industrial_torque.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  padding: 95px 0 80px;
+  border-bottom: 4px solid var(--vq-blue);
+}
+
+.hero-box {
+  max-width: 720px;
+}
+
+.hero-tag {
+  display: inline-block;
+  background: var(--vq-blue);
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 4px 12px;
+  margin-bottom: 16px;
+  border-left: 3px solid var(--vq-cyan);
+}
+
+.hero-box h1 {
+  font-size: 2.75rem;
+  line-height: 1.12;
+  color: #ffffff;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+.hero-box h1 span { color: var(--vq-cyan); }
+
+.hero-box p {
+  color: #e2e8f0;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 36px;
+}
+
+.hero-stats-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  border-top: 2px solid rgba(1, 91, 145, 0.5);
+  padding-top: 20px;
+}
+.stat-item strong {
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--vq-cyan-light);
+  line-height: 1.1;
+}
+.stat-item span {
+  font-size: 0.7rem;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 600;
+}
+
+/* ==========================================================================
+   VISUAL DEPARTMENT TILES (Real Product Categories)
+   ========================================================================== */
+.section-department-tiles {
+  padding: 55px 0;
+  background: #f4f6f8;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.section-headline {
+  margin-bottom: 30px;
+}
+.section-headline h2 {
+  font-size: 1.75rem;
+  color: var(--vq-dark);
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+.section-headline p {
+  color: var(--vq-text-muted);
+  font-size: 0.95rem;
+  max-width: 650px;
+}
+
+.dept-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.dept-card {
+  background: #ffffff;
+  border: 1px solid #cdd2d6;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+.dept-card:hover {
+  border-color: var(--vq-blue);
+  box-shadow: 0 8px 24px rgba(1, 91, 145, 0.12);
+}
+.dept-card:hover .dept-img-container img {
+  transform: scale(1.05);
+}
+
+.dept-img-container {
+  height: 180px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  overflow: hidden;
+  border-bottom: 1px solid #e5e7eb;
+}
+.dept-img-container img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.dept-info {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border-top: 3px solid transparent;
+  transition: border-color 0.2s;
+}
+.dept-card:hover .dept-info {
+  border-top-color: var(--vq-blue);
+}
+.dept-info h4 {
+  font-size: 0.88rem;
+  margin: 0;
+  color: var(--vq-dark);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.dept-info i {
+  color: var(--vq-blue);
+  font-size: 1.2rem;
+}
+
+/* ==========================================================================
+   ENGINEERING SELECTION TOOLS & CHARTS
+   ========================================================================== */
+.section-selection-tools {
+  padding: 55px 0;
+  background: #ffffff;
+}
+
+.tools-4grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.tool-box-card {
+  background: var(--vq-dark-navy);
+  color: #ffffff;
+  border: 1px solid var(--vq-border-dark);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 200px;
+  transition: all 0.2s;
+}
+.tool-box-card:hover {
+  background: var(--vq-navy-panel);
+  border-color: var(--vq-cyan);
+}
+.tool-box-card h4 {
+  font-size: 0.95rem;
+  color: #ffffff;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.tool-box-card p {
+  color: #9ca3af;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin: 0;
+}
+.tool-box-card .tool-link {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--vq-cyan);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+}
+.tool-box-card:hover .tool-link {
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   PRODUCT CATALOG (VICTORQ Clean Cards)
+   ========================================================================== */
+.section-catalog-grid {
+  padding: 60px 0;
+  background: #f8fafc;
+  border-top: 1px solid #e5e7eb;
+}
+
+.category-tab-bar {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  margin-bottom: 24px;
+  border-bottom: 2px solid #e5e7eb;
+}
+
+.cat-tab-button {
+  padding: 10px 18px;
+  border: 1px solid #cdd2d6;
+  background: #ffffff;
+  color: var(--vq-dark);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.76rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.cat-tab-button:hover {
+  border-color: var(--vq-blue);
+  color: var(--vq-blue);
+}
+.cat-tab-button.active {
+  background: var(--vq-blue);
+  color: #ffffff;
+  border-color: var(--vq-blue);
+}
+.cat-tab-button.active i {
+  color: var(--vq-cyan-light);
+}
+
+.products-layout-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 20px;
+}
+
+.prod-item-card {
+  background: #ffffff;
+  border: 1px solid #cdd2d6;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s;
+}
+.prod-item-card:hover {
+  border-color: var(--vq-blue);
+  box-shadow: 0 6px 18px rgba(1, 91, 145, 0.1);
+}
+
+.prod-item-img {
+  height: 200px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.prod-item-img img {
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.prod-item-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.prod-cat-badge {
+  align-self: flex-start;
+  background: var(--vq-blue-light);
+  color: var(--vq-blue);
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 2px 6px;
+  margin-bottom: 6px;
+}
+
+.prod-model-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 900;
+  color: var(--vq-dark);
+  margin-bottom: 4px;
+  text-transform: uppercase;
+}
+
+.prod-item-body h3 {
+  font-size: 0.92rem;
+  color: #1f2937;
+  margin-bottom: 12px;
+  line-height: 1.35;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  text-transform: none;
+  height: 2.7em;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.prod-spec-table {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px 0;
+  font-size: 0.76rem;
+  flex-grow: 1;
+}
+.prod-spec-table li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 4px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.prod-spec-table li span:first-child { color: var(--vq-text-muted); font-size: 0.76rem; }
+.prod-spec-table li span:last-child { 
+  font-family: 'Roboto Mono', monospace; 
+  font-weight: 700; 
+  color: var(--vq-dark); 
+  text-align: right; 
+  font-size: 0.74rem;
+}
+
+.prod-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  margin-top: auto;
+}
+.btn-action-spec {
+  background: #f4f6f8;
+  border: 1px solid #cdd2d6;
+  color: var(--vq-dark);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-action-spec:hover {
+  background: var(--vq-dark);
+  color: #ffffff;
+  border-color: var(--vq-dark);
+}
+
+.btn-action-quote {
+  background: var(--vq-blue);
+  border: 1px solid var(--vq-blue-dark);
+  color: #ffffff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 8px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.btn-action-quote:hover {
+  background: var(--vq-dark);
+  color: #ffffff;
+  border-color: var(--vq-dark);
+}
+
+/* ==========================================================================
+   HEAVY SOLUTIONS APPLICATION BANNER (Realistic Photo Banner)
+   ========================================================================== */
+.section-heavy-solutions {
+  background-color: #0a1118;
+  background-image: linear-gradient(to right, rgba(10, 17, 24, 0.95) 0%, rgba(10, 17, 24, 0.78) 60%, rgba(10, 17, 24, 0.4) 100%), url('../img/banners/heavy_hydraulic_lifting.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+  padding: 85px 0;
+  border-top: 4px solid var(--vq-blue);
+  border-bottom: 4px solid var(--vq-blue);
+}
+
+.solutions-content {
+  max-width: 680px;
+}
+.solutions-content h2 {
+  font-size: 2.2rem;
+  color: #ffffff;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+}
+.solutions-content h2 span { color: var(--vq-cyan); }
+.solutions-content p {
+  color: #e2e8f0;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* ==========================================================================
+   TECHNICAL BOLTING & SPECIFICATION TABLES
+   ========================================================================== */
+.section-tech-tables {
+  padding: 60px 0;
+  background: #ffffff;
+}
+
+.tech-table-card {
+  border: 1px solid #cdd2d6;
+  margin-bottom: 24px;
+  background: #ffffff;
+}
+.tech-table-header {
+  background: var(--vq-dark-navy);
+  color: #ffffff;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 3px solid var(--vq-blue);
+}
+.tech-table-header h3 {
+  font-size: 1.05rem;
+  color: #ffffff;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.table-enerpac-dense {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+.table-enerpac-dense th {
+  background: #f4f6f8;
+  color: var(--vq-dark);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 9px 12px;
+  text-align: left;
+  border: 1px solid #cdd2d6;
+}
+.table-enerpac-dense td {
+  padding: 8px 12px;
+  border: 1px solid #e5e7eb;
+  color: #1f2937;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.78rem;
+}
+.table-enerpac-dense tr:nth-child(even) { background-color: #fafafa; }
+.table-enerpac-dense tr:hover { background-color: #f1f5f9; }
+.table-enerpac-dense td:first-child { 
+  font-weight: 700; 
+  color: var(--vq-dark); 
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   QUOTATION & RFQ SECTION (Realistic Industrial Background)
+   ========================================================================== */
+.section-rfq-inquiry {
+  padding: 70px 0;
+  background-color: #0a1118;
+  background-image: linear-gradient(to right, rgba(10, 17, 24, 0.96) 0%, rgba(10, 17, 24, 0.88) 100%), url('../img/banners/flange_maintenance_tools.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #ffffff;
+}
+
+.rfq-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.rfq-info-col h2 {
+  font-size: 2.2rem;
+  color: #ffffff;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.rfq-info-col p {
+  color: #cbd5e1;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.rfq-contact-box {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.rfq-contact-box li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: #e2e8f0;
+}
+.rfq-contact-box i {
+  color: var(--vq-cyan);
+  font-size: 1.2rem;
+}
+
+.rfq-form-panel {
+  background: #ffffff;
+  padding: 32px;
+  color: #000000;
+  border-top: 4px solid var(--vq-blue);
+}
+
+.form-group-enerpac {
+  margin-bottom: 14px;
+}
+.form-group-enerpac label {
+  display: block;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #374151;
+  margin-bottom: 5px;
+}
+.form-group-enerpac input, 
+.form-group-enerpac select, 
+.form-group-enerpac textarea {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1px solid #cdd2d6;
+  font-size: 0.88rem;
+  color: #111827;
+  outline: none;
+  font-family: inherit;
+  background: #ffffff;
+}
+.form-group-enerpac input:focus, 
+.form-group-enerpac select:focus, 
+.form-group-enerpac textarea:focus {
+  border-color: var(--vq-blue);
+  box-shadow: 0 0 0 2px rgba(1, 91, 145, 0.2);
+}
+
+.form-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* ==========================================================================
+   GLOBAL CORPORATE FOOTER (VICTORQ Blue Identity)
+   ========================================================================== */
+footer.global-enerpac-footer {
+  background: var(--vq-dark);
+  color: #9ca3af;
+  padding: 50px 0 20px;
+  border-top: 4px solid var(--vq-blue);
+}
+
+.footer-4col {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 36px;
+}
+.footer-4col h4 {
+  color: #ffffff;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 14px;
+}
+.footer-4col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.footer-4col li {
+  margin-bottom: 8px;
+  font-size: 0.82rem;
+}
+.footer-4col a:hover {
+  color: var(--vq-cyan);
+}
+
+.footer-bottom-row {
+  border-top: 1px solid var(--vq-border-dark);
+  padding-top: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-size: 0.76rem;
+}
+
+/* Modal Ficha */
+.overlay-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 17, 24, 0.88);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 20px;
+}
+.overlay-modal.abierto { display: flex; }
+
+.modal-dialog-box {
+  background: #ffffff;
+  max-width: 600px;
+  width: 100%;
+  padding: 30px;
+  position: relative;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-top: 4px solid var(--vq-blue);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6);
+}
+
+.btn-close-box {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  background: none;
+  border: none;
+  color: #000000;
+  font-size: 1.5rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 991.98px) {
+  .hero-stats-strip { grid-template-columns: 1fr 1fr; }
+  .dept-grid { grid-template-columns: 1fr 1fr; }
+  .tools-4grid { grid-template-columns: 1fr 1fr; }
+  .rfq-grid-2 { grid-template-columns: 1fr; }
+  .footer-4col { grid-template-columns: 1fr 1fr; }
+  .nav-menu-list { display: none; }
+}
+
+@media (max-width: 575.98px) {
+  .dept-grid { grid-template-columns: 1fr; }
+  .tools-4grid { grid-template-columns: 1fr; }
+  .form-2col { grid-template-columns: 1fr; }
+  .footer-4col { grid-template-columns: 1fr; }
+}
