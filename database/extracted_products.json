@@ -1,0 +1,194 @@
+[
+  {
+    "id": 1,
+    "cat_slug": "llaves",
+    "model": "Serie MXTA",
+    "name": "Llave de Torque Hidráulica de Cuadrante",
+    "image": "prod_01_llaves.png",
+    "specs": "{'Torque':'200 – 37.000 Lb-ple','Cuadrante':'3/4\" a 2-1/2\"','Presión':'700 bar','Modelos':'1,3,5,8,10,20,25,35 MXTA'}"
+  },
+  {
+    "id": 2,
+    "cat_slug": "llaves",
+    "model": "Serie XLCTA (LOW)",
+    "name": "Llave de Torque Bajo Perfil / Hueca",
+    "image": "prod_02_llaves.png",
+    "specs": "{'Torque':'130 – 30.190 Lb-ple','Hexágono':'19 – 175 mm','Modelos':'2,4,8,14,30 XLCTA','Accesorios':'Ratchet intercambiable'}"
+  },
+  {
+    "id": 3,
+    "cat_slug": "llaves",
+    "model": "Serie VIC",
+    "name": "Llave de Torque Hidráulica de Cuadrante (Square Drive)",
+    "image": "prod_03_llaves.png",
+    "specs": "{'Modelos':'VIC1 a VIC50','Encastre':'Cuadrado','Ficha técnica':'Consultar rango de torque exacto'}"
+  },
+  {
+    "id": 4,
+    "cat_slug": "llaves",
+    "model": "Serie TORQ",
+    "name": "Llave de Torque Hidráulica de Bajo Perfil (Low Profile)",
+    "image": "prod_04_llaves.png",
+    "specs": "{'Modelos':'TORQ2 a TORQ30 (+variantes -50/-65/-90/-115/-135/-155)','Ficha técnica':'Consultar rango de torque exacto'}"
+  },
+  {
+    "id": 5,
+    "cat_slug": "bombas",
+    "model": "Bomba Electrohidráulica",
+    "name": "Central Electrohidráulica VICTORQ",
+    "image": "prod_05_bombas.png",
+    "specs": "{'Acoples':'Autotrabantes antigoteo','Manguera':'6 m','Manómetro':'Certificado','Motor':'Sin carbones ni tarjeta'}"
+  },
+  {
+    "id": 6,
+    "cat_slug": "bombas",
+    "model": "TWP-200 / TWP-500P",
+    "name": "Bomba Eléctrica / Neumática para Llave de Torque",
+    "image": "prod_06_bombas.png",
+    "specs": "{'Presión de salida':'40 – 700 bar','Caudal a 700 bar':'0,8 L/min','Peso':'21 kg','Estanque':'7,6 L, aluminio'}"
+  },
+  {
+    "id": 7,
+    "cat_slug": "bombas",
+    "model": "Bomba Manual",
+    "name": "Bomba Manual Hidráulica",
+    "image": "prod_07_bombas.png",
+    "specs": "{'Accionamiento':'Palanca manual','Uso':'General','Presión máx.':'700 bar'}"
+  },
+  {
+    "id": 8,
+    "cat_slug": "bombas",
+    "model": "Series MD / MS / SS / SD",
+    "name": "Bomba Eléctrica Hidráulica",
+    "image": "prod_08_bombas.png",
+    "specs": "{'Presión máx.':'700 bar','Motor':'Antiexplosivo disponible','Ficha técnica':'Consultar caudal por modelo'}"
+  },
+  {
+    "id": 9,
+    "cat_slug": "cilindros",
+    "model": "Serie RCH",
+    "name": "Cilindro de Émbolo Hueco (Hollow Plunger)",
+    "image": "prod_09_cilindros.png",
+    "specs": "{'Tipo':'Émbolo hueco','Presión máx.':'700 bar'}"
+  },
+  {
+    "id": 10,
+    "cat_slug": "cilindros",
+    "model": "Serie RC",
+    "name": "Cilindro de Simple Efecto de Propósito General",
+    "image": "prod_10_cilindros.png",
+    "specs": "{'Tipo':'Simple efecto','Presión máx.':'700 bar'}"
+  },
+  {
+    "id": 11,
+    "cat_slug": "cilindros",
+    "model": "Serie CLSG",
+    "name": "Cilindro de Alta Tonelada",
+    "image": "prod_11_cilindros.png",
+    "specs": "{'Capacidad':'50 – 1.000 ton','Carrera':'50 – 300 mm','Presión máx.':'700 bar'}"
+  },
+  {
+    "id": 12,
+    "cat_slug": "cilindros",
+    "model": "Serie TC",
+    "name": "Cilindro Telescópico",
+    "image": "prod_12_cilindros.png",
+    "specs": "{'Capacidad':'10 / 15 / 30 ton','Etapas':'2 o 3','Presión máx.':'700 bar'}"
+  },
+  {
+    "id": 13,
+    "cat_slug": "cilindros",
+    "model": "Serie BRC / BRP",
+    "name": "Cilindro Tensor (Pulling Cylinder)",
+    "image": "prod_13_cilindros.png",
+    "specs": "{'Aplicación':'Tensado de cables/espárragos','Uso combinado':'Bombas Serie TORQ'}"
+  },
+  {
+    "id": 14,
+    "cat_slug": "cilindros",
+    "model": "Serie RAC",
+    "name": "Cilindro de Aluminio de Simple Efecto",
+    "image": "prod_14_cilindros.png",
+    "specs": "{'Capacidad ref.':'50 ton / 496 kN (RAC-502)','Peso ref.':'8,5 kg','Acabado':'Hard-Coat'}"
+  },
+  {
+    "id": 15,
+    "cat_slug": "multiplicadores",
+    "model": "HT3 / HT4 / HT30 / HT45 / HT60 / HT1-HT13",
+    "name": "Multiplicador de Torque Manual",
+    "image": "prod_15_multiplicadores.png",
+    "specs": "{'Tipo':'Manual, brazo de reacción integrado','Modelos':'MDS, HT3, HT4, HT52, HT72, HT30, HT45, HT60, HT1-HT13'}"
+  },
+  {
+    "id": 16,
+    "cat_slug": "bridas",
+    "model": "FSM-8 / FSH-14",
+    "name": "Separador de Bridas Hidráulico",
+    "image": "prod_16_bridas.png",
+    "specs": "{'Fuerza máx. ref.':'8 – 14 ton','Insertos':'Intercambiables'}"
+  },
+  {
+    "id": 17,
+    "cat_slug": "bridas",
+    "model": "FSW25TE / FSW25TI",
+    "name": "Separador de Bridas 24 Ton",
+    "image": "prod_17_bridas.png",
+    "specs": "{'Capacidad':'24 ton','Acceso':'Desde 6 mm','Presión':'700 bar'}"
+  },
+  {
+    "id": 18,
+    "cat_slug": "bridas",
+    "model": "FA-1TM / FA-4TM / FA-9TM / FA-9TE",
+    "name": "Alineador de Bridas",
+    "image": "prod_18_bridas.png",
+    "specs": "{'Tipo':'Mecánico/hidráulico','Uso':'Corrección de desalineación'}"
+  },
+  {
+    "id": 19,
+    "cat_slug": "cortatuercas",
+    "model": "HNS / DNS / NS / NC",
+    "name": "Corta Tuercas Hidráulico (Nut Splitter)",
+    "image": "prod_19_cortatuercas.png",
+    "specs": "{'Hexágono':'17 – 135 mm','Perno/Espárrago':'M10 – M95','Presión':'700 bar'}"
+  },
+  {
+    "id": 20,
+    "cat_slug": "extractores",
+    "model": "Gear Pusher",
+    "name": "Extractor Hidráulico de Tres Patas",
+    "image": "prod_20_extractores.png",
+    "specs": "{'Tipo':'Hidráulico / mecánico de cruceta','Uso':'Rodamientos, poleas, engranajes'}"
+  },
+  {
+    "id": 21,
+    "cat_slug": "extractores",
+    "model": "Extractor Autocentrante",
+    "name": "Extractor Mecánico Autocentrante",
+    "image": "prod_21_extractores.png",
+    "specs": "{'Tipo':'Mecánico, 2 o 3 brazos','Uso':'Desmontaje sin dañar el eje'}"
+  },
+  {
+    "id": 22,
+    "cat_slug": "prensas",
+    "model": "Serie H",
+    "name": "Prensa Hidráulica de Taller",
+    "image": "prod_22_prensas.png",
+    "specs": "{'Capacidad':'10 – 200 ton','Luz máx. x ancho':'1.384 x 1.219 mm','Presión máx.':'700 bar'}"
+  },
+  {
+    "id": 23,
+    "cat_slug": "accesorios",
+    "model": "C604 / CT901",
+    "name": "Acople Rápido Antigoteo",
+    "image": "prod_23_accesorios.png",
+    "specs": "{'Rosca':'1/4\" – 3/8\" NPT','Presión máx.':'700 bar'}"
+  },
+  {
+    "id": 24,
+    "cat_slug": "accesorios",
+    "model": "HG-63-70 / HG-100-70",
+    "name": "Manómetro Hidráulico",
+    "image": "prod_24_accesorios.png",
+    "specs": "{'Diámetro':'63 / 100 mm','Rango':'0 – 700 bar'}"
+  }
+]

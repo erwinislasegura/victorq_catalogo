@@ -1,0 +1,608 @@
+[
+  {
+    "id": 1,
+    "title": "Serie MXTA — Llaves de Torque Hidráulicas de Cuadrante",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Modelo",
+      "Torque mín. (Lb-ple)",
+      "Torque máx. (Lb-ple)",
+      "Cuadrante",
+      "Peso (kg)"
+    ],
+    "rows": [
+      [
+        "1 MXTA",
+        "200",
+        "1.390",
+        "3/4\"",
+        "2"
+      ],
+      [
+        "3 MXTA",
+        "480",
+        "3.280",
+        "1\"",
+        "2"
+      ],
+      [
+        "5 MXTA",
+        "835",
+        "5.590",
+        "1-1/2\"",
+        "7"
+      ],
+      [
+        "8 MXTA",
+        "800",
+        "8.000",
+        "1-1/2\"",
+        "91*"
+      ],
+      [
+        "10 MXTA",
+        "1.755",
+        "11.520",
+        "1-1/2\"",
+        "131*"
+      ],
+      [
+        "20 MXTA",
+        "2.960",
+        "19.760",
+        "2-1/2\"",
+        "25"
+      ],
+      [
+        "25 MXTA",
+        "3.960",
+        "25.890",
+        "2-1/2\"",
+        "31"
+      ],
+      [
+        "35 MXTA",
+        "4.800",
+        "37.000",
+        "2-1/2\"",
+        "45"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 2,
+    "title": "Serie XLCTA (LOW) — Llaves de Bajo Perfil / Hexágono Hueco",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Modelo",
+      "Torque mín. (Lb-ple)",
+      "Torque máx. (Lb-ple)",
+      "Hexágono (mm)",
+      "Peso módulo (kg)",
+      "Peso hexágono (kg)"
+    ],
+    "rows": [
+      [
+        "2 XLCTA",
+        "130",
+        "1.367",
+        "19 – 60",
+        "9",
+        "15"
+      ],
+      [
+        "4 XLCTA",
+        "320",
+        "3.930",
+        "25 – 80",
+        "17",
+        "34"
+      ],
+      [
+        "8 XLCTA",
+        "650",
+        "7.500",
+        "41 – 105",
+        "30",
+        "63"
+      ],
+      [
+        "14 XLCA",
+        "1.150",
+        "13.020",
+        "50 – 117",
+        "46",
+        "114"
+      ],
+      [
+        "30 XLCTA",
+        "2.600",
+        "30.190",
+        "80 – 175",
+        "104",
+        "205"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 3,
+    "title": "Serie VIC / TORQ — Modelos por Capacidad",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Serie VIC (cuadrante)",
+      "Serie TORQ (bajo perfil)"
+    ],
+    "rows": [
+      [
+        "VIC 1",
+        "TORQ 2 / TORQ 2-50"
+      ],
+      [
+        "VIC 3",
+        "TORQ 4 / TORQ 4-65"
+      ],
+      [
+        "VIC 5",
+        "TORQ 8 / TORQ 8-90"
+      ],
+      [
+        "VIC 8",
+        "TORQ 14 / TORQ 14-115"
+      ],
+      [
+        "VIC 10",
+        "TORQ 18 / TORQ 18-135"
+      ],
+      [
+        "VIC 15",
+        "TORQ 30 / TORQ 30-155"
+      ],
+      [
+        "VIC 20 / VIC 25 / VIC 35 / VIC 50",
+        "—"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 4,
+    "title": "Bomba Eléctrica / Neumática para Llave de Torque (TWP)",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Parámetro",
+      "Valor"
+    ],
+    "rows": [
+      [
+        "Caudal de aceite a 700 bar",
+        "0,8 L/min"
+      ],
+      [
+        "Caudal de aceite a 300 bar",
+        "1,6 L/min"
+      ],
+      [
+        "Caudal de aceite a 70 bar",
+        "8 L/min"
+      ],
+      [
+        "Capacidad de estanque",
+        "7,6 L"
+      ],
+      [
+        "Rango de presión de aire (versión neumática)",
+        "4 – 8 bar"
+      ],
+      [
+        "Peso",
+        "21 kg"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 5,
+    "title": "Bomba Electrohidráulica VICTORQ",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Característica",
+      "Detalle"
+    ],
+    "rows": [
+      [
+        "Acoples",
+        "Autotrabantes antigoteo"
+      ],
+      [
+        "Enfriamiento",
+        "Radiador"
+      ],
+      [
+        "Válvula de alivio",
+        "Sí, regulable"
+      ],
+      [
+        "Motor",
+        "Sin carbones ni tarjeta electrónica"
+      ],
+      [
+        "Manómetro",
+        "Certificado"
+      ],
+      [
+        "Manguera",
+        "6 metros"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 6,
+    "title": "Bomba Eléctrica (Series MD / MS / SS / SD)",
+    "subtitle": "",
+    "headers": [],
+    "rows": [],
+    "note": ""
+  },
+  {
+    "id": 7,
+    "title": "Serie CLSG — Cilindro de Alta Tonelada",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Modelo",
+      "Capacidad",
+      "Carrera",
+      "Área efectiva",
+      "Cap. de aceite",
+      "Altura colapsada",
+      "Peso"
+    ],
+    "rows": [
+      [
+        "CLSG-502",
+        "50 ton / 539 kN",
+        "50 mm",
+        "77,0 cm²",
+        "385 cm³",
+        "162 mm",
+        "17 kg"
+      ],
+      [
+        "CLSG-100012",
+        "1.000 ton / 10.260 kN",
+        "300 mm",
+        "1.465,7 cm²",
+        "43.972 cm³",
+        "814 mm",
+        "1.439 kg"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 8,
+    "title": "Cilindro Telescópico (TC)",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Modelo",
+      "Capacidad",
+      "Etapas"
+    ],
+    "rows": [
+      [
+        "TC10-2 / TC10-3",
+        "10 ton",
+        "2 / 3"
+      ],
+      [
+        "TC15-2 / TC15-3",
+        "15 ton",
+        "2 / 3"
+      ],
+      [
+        "TC30-2 / TC30-3",
+        "30 ton",
+        "2 / 3"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 9,
+    "title": "Serie RAC — Cilindro de Aluminio de Simple Efecto",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Modelo",
+      "Capacidad",
+      "Área efectiva",
+      "Cap. de aceite",
+      "Altura",
+      "Diám. exterior",
+      "Peso"
+    ],
+    "rows": [
+      [
+        "RAC-502",
+        "50 ton / 496 kN",
+        "70,9 cm²",
+        "354 cm³",
+        "186 mm",
+        "130 mm",
+        "8,5 kg"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 10,
+    "title": "RC / RCH / BRC-BRP — Otras Series de Cilindro",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Serie",
+      "Descripción"
+    ],
+    "rows": [
+      [
+        "RC",
+        "Cilindro de simple efecto de propósito general"
+      ],
+      [
+        "RCH",
+        "Cilindro de émbolo hueco (Hollow Plunger)"
+      ],
+      [
+        "BRC / BRP",
+        "Cilindro tensor (Pulling Cylinder), uso combinado con bombas serie TORQ"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 11,
+    "title": "Multiplicador de Torque Manual (Manual Torque Multiplier)",
+    "subtitle": "",
+    "headers": [],
+    "rows": [],
+    "note": ""
+  },
+  {
+    "id": 12,
+    "title": "Separador de Bridas 24 Ton — FSW25TE / FSW25TI",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Modelo",
+      "Tipo",
+      "Presión de trabajo"
+    ],
+    "rows": [
+      [
+        "FSW25TE",
+        "Externo",
+        "700 bar"
+      ],
+      [
+        "FSW25TI",
+        "Integral",
+        "700 bar"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 13,
+    "title": "Separador de Bridas — Cabezales FSM-8 / FSH-14",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Modelo",
+      "Fuerza máxima aprox."
+    ],
+    "rows": [
+      [
+        "FSM-8",
+        "8 ton"
+      ],
+      [
+        "FSH-14",
+        "14 ton"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 14,
+    "title": "Alineador de Bridas (Flange Alignment Tool)",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Modelo"
+    ],
+    "rows": [
+      [
+        "FA-1TM"
+      ],
+      [
+        "FA-4TM"
+      ],
+      [
+        "FA-9TM"
+      ],
+      [
+        "FA-9TE"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 15,
+    "title": "Corta Tuercas Hidráulico — Integral (HNS) y Doble Efecto (DNS)",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Modelo",
+      "Hexágono",
+      "Perno / Espárrago",
+      "Peso"
+    ],
+    "rows": [
+      [
+        "HNS2432",
+        "17 – 32 mm (11/16 – 1 1/4\")",
+        "M10 – M22 (1/2 – 3/4\")",
+        "5 kg"
+      ],
+      [
+        "HNS3241",
+        "32 – 41 mm (1 1/4 – 1 5/8\")",
+        "M22 – M27 (3/4 – 1\")",
+        "7 kg"
+      ],
+      [
+        "HNS4150",
+        "41 – 50 mm (1 5/8 – 2\")",
+        "M27 – M33 (1 – 1 1/4\")",
+        "11 kg"
+      ],
+      [
+        "DNS75105",
+        "75 – 105 mm (2 15/16 – 4 1/4\")",
+        "M48 – M72",
+        "51 kg"
+      ],
+      [
+        "DNS105135",
+        "105 – 135 mm (4 1/4 – 5 3/8\")",
+        "M72 – M95",
+        "98 kg"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 16,
+    "title": "Extractores — Familia Completa",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Modelo / Tipo",
+      "Descripción"
+    ],
+    "rows": [
+      [
+        "Gear Pusher",
+        "Extractor hidráulico de tres patas"
+      ],
+      [
+        "Extractor de cruceta",
+        "Extractor mecánico de cruceta"
+      ],
+      [
+        "Integral Puller / Cobra Puller",
+        "Extractor mecánico integral, mordazas autocentrantes"
+      ],
+      [
+        "YL-Series",
+        "Extractor hidráulico de tres garras (split)"
+      ],
+      [
+        "Extractor autocentrante",
+        "Mecánico, dos o tres brazos"
+      ],
+      [
+        "Extractor hidráulico separado",
+        "Separated Hydraulic Puller"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 17,
+    "title": "Prensa Hidráulica de Taller Serie H",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Capacidad",
+      "Modelos asociados"
+    ],
+    "rows": [
+      [
+        "10 ton",
+        "IPE-1215 / IPH-1240 / IPH-1234"
+      ],
+      [
+        "25 ton",
+        "IPE-2505 / IPE-2510 / IPH-2531"
+      ],
+      [
+        "30 ton",
+        "IPE-3060 / IPH-3080"
+      ],
+      [
+        "50 ton",
+        "IPE-5010 / IPH-5030 / IPH-5031 / IPE-5005 / IPE-5060 / IPH-5080"
+      ],
+      [
+        "100 ton",
+        "IPE-10010 / IPH-10030 / IPE-10060 / IPH-10080"
+      ],
+      [
+        "150 ton",
+        "IPE-15065"
+      ],
+      [
+        "200 ton",
+        "IPE-20065"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 18,
+    "title": "Acople Rápido Antigoteo (Quick Coupling)",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Modelo",
+      "Hembra",
+      "Macho",
+      "Rosca"
+    ],
+    "rows": [
+      [
+        "C604",
+        "CR604",
+        "CH604",
+        "3/8\" NPT"
+      ],
+      [
+        "CT901",
+        "C901",
+        "T901",
+        "1/4\" NPT"
+      ]
+    ],
+    "note": ""
+  },
+  {
+    "id": 19,
+    "title": "Manómetro Hidráulico (Hydraulic Gauge)",
+    "subtitle": "",
+    "headers": [
+      "<tr><th>Modelo",
+      "Diámetro",
+      "Rosca",
+      "Rango de presión"
+    ],
+    "rows": [
+      [
+        "HG-63-70",
+        "63 mm",
+        "NPT 1/4\"",
+        "0 – 700 bar"
+      ],
+      [
+        "HG-100-70",
+        "100 mm",
+        "G 1/2",
+        "0 – 700 bar"
+      ]
+    ],
+    "note": ""
+  }
+]

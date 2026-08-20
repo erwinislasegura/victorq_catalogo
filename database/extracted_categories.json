@@ -1,0 +1,74 @@
+[
+  {
+    "id": 1,
+    "slug": "llaves",
+    "name": "Llaves de Torque",
+    "description": "Llaves hidráulicas de cuadrante y bajo perfil para apernado de alta precisión en minería e industria.",
+    "icon": "bi-wrench-adjustable",
+    "sort_order": 1
+  },
+  {
+    "id": 2,
+    "slug": "bombas",
+    "name": "Bombas y Centrales",
+    "description": "Centrales electrohidráulicas, neumáticas y manuales de 700 bar de alto rendimiento.",
+    "icon": "bi-lightning-charge",
+    "sort_order": 2
+  },
+  {
+    "id": 3,
+    "slug": "cilindros",
+    "name": "Cilindros Hidráulicos",
+    "description": "Cilindros de simple efecto, émbolo hueco, telescópicos y alta tonelada para levante pesado.",
+    "icon": "bi-bullseye",
+    "sort_order": 3
+  },
+  {
+    "id": 4,
+    "slug": "multiplicadores",
+    "name": "Multiplicadores de Torque",
+    "description": "Multiplicadores mecánicos y manuales para apriete y desapriete en espacios confinados.",
+    "icon": "bi-gear-wide-connected",
+    "sort_order": 4
+  },
+  {
+    "id": 5,
+    "slug": "bridas",
+    "name": "Herramientas para Bridas",
+    "description": "Separadores y alineadores de bridas hidráulicos y mecánicos para mantenimiento de tuberías.",
+    "icon": "bi-bounding-box-circles",
+    "sort_order": 5
+  },
+  {
+    "id": 6,
+    "slug": "cortatuercas",
+    "name": "Corta Tuercas",
+    "description": "Cortatuercas hidráulicos para corte seguro y rápido de tuercas trabadas o corroídas.",
+    "icon": "bi-scissors",
+    "sort_order": 6
+  },
+  {
+    "id": 7,
+    "slug": "extractores",
+    "name": "Extractores",
+    "description": "Extractores hidráulicos y mecánicos de 2 y 3 brazos para rodamientos, poleas y piñones.",
+    "icon": "bi-tools",
+    "sort_order": 7
+  },
+  {
+    "id": 8,
+    "slug": "prensas",
+    "name": "Prensas de Taller",
+    "description": "Prensas hidráulicas tipo H para montaje, desmontaje y enderezado estructural.",
+    "icon": "bi-hammer",
+    "sort_order": 8
+  },
+  {
+    "id": 9,
+    "slug": "accesorios",
+    "name": "Accesorios",
+    "description": "Acoples rápidos antigoteo, manómetros certificados y mangueras hidráulicas de 700 bar.",
+    "icon": "bi-sliders",
+    "sort_order": 9
+  }
+]
