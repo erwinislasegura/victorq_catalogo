@@ -1,15 +1,18 @@
 </main>
 
 <!-- ADMIN FOOTER -->
-<footer class="admin-footer text-white-50 text-xs mt-auto">
+<footer class="admin-footer text-muted text-xs mt-auto">
     <div class="d-flex flex-column flex-sm-row justify-content-between align-items-center gap-2">
-        <div>
-            &copy; <?= date('Y') ?> <strong class="text-white"><?= APP_NAME ?></strong> — Sistema de Catálogo y Cotizaciones.
+        <div class="d-flex align-items-center gap-2">
+            <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-0.5" style="font-size: 0.68rem;">
+                <i class="bi bi-circle-fill text-success me-1" style="font-size: 0.45rem;"></i> Sistema Operativo 700 Bar
+            </span>
+            <span>&copy; <?= date('Y') ?> <strong class="text-dark"><?= APP_COMPANY ?></strong>. Todos los derechos reservados.</span>
         </div>
         <div class="d-flex align-items-center gap-3">
-            <span>Versión <span class="badge bg-secondary"><?= APP_VERSION ?></span></span>
-            <span class="d-none d-sm-inline">|</span>
-            <span>Soporte: <a href="mailto:<?= APP_EMAIL ?>" class="text-info text-decoration-none"><?= APP_EMAIL ?></a></span>
+            <span class="badge bg-light text-dark border">v<?= APP_VERSION ?></span>
+            <span class="d-none d-sm-inline text-muted">|</span>
+            <span>Mesa de Ayuda: <a href="mailto:<?= APP_EMAIL ?>" class="text-primary text-decoration-none fw-semibold"><?= APP_EMAIL ?></a></span>
         </div>
     </div>
 </footer>

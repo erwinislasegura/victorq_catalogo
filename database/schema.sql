@@ -89,9 +89,15 @@ CREATE TABLE `products` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `category_id` INT NOT NULL,
   `model` VARCHAR(150) NOT NULL,
+  `sku` VARCHAR(50) NULL,
   `name` VARCHAR(255) NOT NULL,
   `description` TEXT NULL,
+  `price` DECIMAL(12,2) DEFAULT 150000.00,
+  `stock` INT DEFAULT 10,
+  `min_stock` INT DEFAULT 2,
+  `warehouse_location` VARCHAR(100) DEFAULT 'Bodega Central - Santiago',
   `image` VARCHAR(255) NULL,
+  `datasheet_pdf` VARCHAR(255) NULL,
   `specs_json` TEXT NULL,
   `sort_order` INT DEFAULT 0,
   `is_featured` TINYINT(1) DEFAULT 0,
@@ -122,7 +128,7 @@ CREATE TABLE `technical_tables` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 8. Tabla de Solicitudes de Cotización
-DROP TABLE IF EXISTS `quotes` ;
+DROP TABLE IF EXISTS `quotes`;
 CREATE TABLE `quotes` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `product_id` INT NULL,
@@ -137,11 +143,50 @@ CREATE TABLE `quotes` (
   `ip_address` VARCHAR(45) NULL,
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  INDEX `idx_quotes_status` (`status`),
-  INDEX `idx_quotes_created` (`created_at`)
+  INDEX `idx_quotes_product` (`product_id`),
+  INDEX `idx_quotes_status` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- 9. Tabla de Logs de Auditoría y Actividad
+-- 9. Tabla de Pasarelas de Pago (Flow.cl)
+DROP TABLE IF EXISTS `payment_gateways`;
+CREATE TABLE `payment_gateways` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `code` VARCHAR(50) NOT NULL UNIQUE,
+  `name` VARCHAR(100) NOT NULL,
+  `api_key` VARCHAR(255) NULL,
+  `secret_key` VARCHAR(255) NULL,
+  `environment` ENUM('sandbox', 'production') DEFAULT 'sandbox',
+  `currency` VARCHAR(10) DEFAULT 'CLP',
+  `is_active` TINYINT(1) DEFAULT 0,
+  `settings_json` TEXT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 10. Tabla de Órdenes y Transacciones de Pago (Flow.cl)
+DROP TABLE IF EXISTS `payment_orders`;
+CREATE TABLE `payment_orders` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `commerce_order` VARCHAR(100) NOT NULL UNIQUE,
+  `flow_order` VARCHAR(100) NULL,
+  `product_id` INT NULL,
+  `product_name` VARCHAR(255) NOT NULL,
+  `amount` DECIMAL(12, 2) NOT NULL,
+  `currency` VARCHAR(10) DEFAULT 'CLP',
+  `customer_name` VARCHAR(150) NOT NULL,
+  `customer_email` VARCHAR(150) NOT NULL,
+  `customer_phone` VARCHAR(50) NULL,
+  `status` ENUM('pending', 'paid', 'rejected', 'canceled') DEFAULT 'pending',
+  `flow_token` VARCHAR(255) NULL,
+  `payment_data` TEXT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX `idx_po_commerce` (`commerce_order`),
+  INDEX `idx_po_token` (`flow_token`),
+  INDEX `idx_po_status` (`status`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 11. Tabla de Logs de Auditoría y Actividad
 DROP TABLE IF EXISTS `activity_logs`;
 CREATE TABLE `activity_logs` (
   `id` INT AUTO_INCREMENT PRIMARY KEY,
@@ -154,6 +199,45 @@ CREATE TABLE `activity_logs` (
   INDEX `idx_logs_user` (`user_id`),
   INDEX `idx_logs_module` (`module`),
   INDEX `idx_logs_created` (`created_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 12. Tabla de Mensajes de Contacto Web
+DROP TABLE IF EXISTS `contacts`;
+CREATE TABLE `contacts` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `name` VARCHAR(150) NOT NULL,
+  `company` VARCHAR(150) NOT NULL,
+  `rut` VARCHAR(50) NULL,
+  `email` VARCHAR(150) NOT NULL,
+  `phone` VARCHAR(50) NOT NULL,
+  `subject` VARCHAR(150) NOT NULL,
+  `message` TEXT NOT NULL,
+  `status` ENUM('unread', 'read', 'responded', 'archived') DEFAULT 'unread',
+  `admin_notes` TEXT NULL,
+  `ip_address` VARCHAR(45) NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX `idx_contact_status` (`status`),
+  INDEX `idx_contact_created` (`created_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 13. Tabla de Kardex y Movimientos de Inventario
+DROP TABLE IF EXISTS `inventory_movements`;
+CREATE TABLE `inventory_movements` (
+  `id` INT AUTO_INCREMENT PRIMARY KEY,
+  `product_id` INT NOT NULL,
+  `type` ENUM('in', 'out', 'adjustment', 'sale') NOT NULL,
+  `quantity` INT NOT NULL,
+  `previous_stock` INT NOT NULL,
+  `new_stock` INT NOT NULL,
+  `reference` VARCHAR(150) NULL,
+  `notes` TEXT NULL,
+  `user_id` INT NULL,
+  `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  INDEX `idx_im_product` (`product_id`),
+  INDEX `idx_im_type` (`type`),
+  INDEX `idx_im_created` (`created_at`),
+  CONSTRAINT `fk_im_product` FOREIGN KEY (`product_id`) REFERENCES `products` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 SET FOREIGN_KEY_CHECKS = 1;

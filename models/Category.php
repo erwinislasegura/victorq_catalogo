@@ -19,4 +19,18 @@ class Category extends Model {
     public function getActiveCategories(): array {
         return $this->where('is_active = 1', [], 'sort_order ASC');
     }
+
+    public function findBySlug(string $slug): ?array {
+        if (!$this->db) return null;
+        $rows = $this->where('slug = :slug LIMIT 1', ['slug' => $slug]);
+        return $rows[0] ?? null;
+    }
+
+    public function findBySlugOrId($identifier): ?array {
+        if (!$this->db) return null;
+        if (is_numeric($identifier)) {
+            return $this->find((int)$identifier);
+        }
+        return $this->findBySlug((string)$identifier);
+    }
 }

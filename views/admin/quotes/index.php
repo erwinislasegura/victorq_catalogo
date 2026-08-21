@@ -36,17 +36,23 @@ $statusBadges = [
 </div>
 
 <div class="card shadow-sm border-0 rounded-3 bg-white">
-    <div class="card-header bg-white py-3 border-bottom d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2">
+    <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between flex-wrap gap-2">
         <div class="d-flex align-items-center gap-2">
-            <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-file-earmark-text text-primary me-2"></i>Solicitudes de Cotización</h6>
+            <h6 class="mb-0 fw-bold text-dark d-flex align-items-center"><i class="bi bi-file-earmark-text text-primary me-2"></i>Solicitudes de Cotización</h6>
             <span class="badge bg-secondary-subtle text-secondary"><?= count($quotes) ?> registros</span>
         </div>
 
-        <div class="d-flex align-items-center gap-2">
-            <div class="input-group input-group-sm" style="max-width: 250px;">
+        <div class="d-flex align-items-center gap-2 flex-nowrap">
+            <div class="input-group input-group-sm" style="width: 220px;">
                 <span class="input-group-text bg-light"><i class="bi bi-search"></i></span>
                 <input type="text" id="quoteSearch" class="form-control" placeholder="Buscar cliente, empresa...">
             </div>
+            <?php if (Auth::can('quotes', 'create')): ?>
+                <a href="<?= ADMIN_URL ?>/?c=quote&a=create" class="btn btn-sm btn-primary d-inline-flex align-items-center gap-1.5 text-xs fw-bold text-nowrap">
+                    <i class="bi bi-plus-lg"></i>
+                    <span>Nueva Cotización</span>
+                </a>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -61,7 +67,7 @@ $statusBadges = [
                         <th>Interés / Producto</th>
                         <th>Fecha de Solicitud</th>
                         <th class="text-center">Estado</th>
-                        <th class="text-end pe-3" style="width: 100px;">Acciones</th>
+                        <th class="text-end pe-3" style="width: 140px;">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -97,8 +103,11 @@ $statusBadges = [
                                     <a href="<?= ADMIN_URL ?>/?c=quote&a=view&id=<?= $q['id'] ?>" class="btn btn-xs btn-outline-primary" title="Ver Detalle y Responder">
                                         <i class="bi bi-eye"></i> Detalle
                                     </a>
+                                    <a href="<?= BASE_URL ?>/quote_pdf.php?quote_id=<?= $q['id'] ?>" target="_blank" class="btn btn-xs btn-outline-danger" title="Ver Cotización Formal PDF (Validez 15 Días)">
+                                        <i class="bi bi-file-earmark-pdf-fill"></i> PDF
+                                    </a>
                                     <?php if (Auth::can('quotes', 'delete')): ?>
-                                        <a href="<?= ADMIN_URL ?>/?c=quote&a=delete&id=<?= $q['id'] ?>" class="btn btn-xs btn-outline-danger btn-delete" data-name="Cotización #<?= $q['id'] ?>" title="Eliminar">
+                                        <a href="<?= ADMIN_URL ?>/?c=quote&a=delete&id=<?= $q['id'] ?>" class="btn btn-xs btn-outline-secondary btn-delete" data-name="Cotización #<?= $q['id'] ?>" title="Eliminar">
                                             <i class="bi bi-trash"></i>
                                         </a>
                                     <?php endif; ?>

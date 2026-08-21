@@ -65,6 +65,9 @@ $pageTitle = 'Gestión de Categorías';
                             </td>
                             <td class="text-end pe-3">
                                 <div class="btn-group btn-group-sm">
+                                    <a href="<?= BASE_URL ?>/category.php?slug=<?= htmlspecialchars($c['slug']) ?>" target="_blank" class="btn btn-xs btn-outline-info" title="Ver Página Pública de Categoría">
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </a>
                                     <?php if (Auth::can('categories', 'edit')): ?>
                                         <button type="button" class="btn btn-xs btn-outline-primary edit-cat-btn" 
                                                 data-id="<?= $c['id'] ?>"

@@ -46,6 +46,11 @@ class ProductController extends Controller {
             $model = trim($_POST['model'] ?? '');
             $name = trim($_POST['name'] ?? '');
             $description = trim($_POST['description'] ?? '');
+            $price = !empty($_POST['price']) ? (float)$_POST['price'] : 150000.00;
+            $stock = isset($_POST['stock']) ? max(0, (int)$_POST['stock']) : 10;
+            $minStock = isset($_POST['min_stock']) ? max(0, (int)$_POST['min_stock']) : 2;
+            $sku = trim($_POST['sku'] ?? '');
+            $warehouseLocation = trim($_POST['warehouse_location'] ?? 'Bodega Central - Santiago');
             $sortOrder = (int)($_POST['sort_order'] ?? 0);
             $isFeatured = isset($_POST['is_featured']) ? 1 : 0;
             $isActive = isset($_POST['is_active']) ? 1 : 0;
@@ -87,25 +92,47 @@ class ProductController extends Controller {
                 $imageName = $_POST['existing_image'];
             }
 
+            // Manejo de Ficha Técnica (Documento PDF / DOC / DOCX)
+            $datasheetName = null;
+            if (isset($_FILES['datasheet_pdf']) && $_FILES['datasheet_pdf']['error'] === UPLOAD_ERR_OK) {
+                $docTmp = $_FILES['datasheet_pdf']['tmp_name'];
+                $docExt = strtolower(pathinfo($_FILES['datasheet_pdf']['name'], PATHINFO_EXTENSION));
+                $allowedDocs = ['pdf', 'doc', 'docx'];
+                if (in_array($docExt, $allowedDocs)) {
+                    $datasheetName = 'ficha_' . preg_replace('/[^a-zA-Z0-9_-]/', '_', strtolower($model)) . '_' . time() . '.' . $docExt;
+                    $destDir = ASSETS_PATH . '/docs/datasheets';
+                    if (!is_dir($destDir)) {
+                        mkdir($destDir, 0755, true);
+                    }
+                    move_uploaded_file($docTmp, $destDir . '/' . $datasheetName);
+                }
+            }
+
             $productModel = new Product();
             $newId = $productModel->create([
                 'category_id' => $categoryId,
                 'model' => $model,
+                'sku' => $sku,
                 'name' => $name,
                 'description' => $description,
+                'price' => $price,
+                'stock' => $stock,
+                'min_stock' => $minStock,
+                'warehouse_location' => $warehouseLocation,
                 'image' => $imageName,
+                'datasheet_pdf' => $datasheetName,
                 'specs_json' => json_encode($specs, JSON_UNESCAPED_UNICODE),
                 'sort_order' => $sortOrder,
                 'is_featured' => $isFeatured,
                 'is_active' => $isActive
             ]);
 
-            $this->setFlash('success', 'Producto creado exitosamente.');
+            $this->setFlash('success', 'Producto creado exitosamente con su ficha técnica.');
             $this->redirect(ADMIN_URL . '/?c=product');
         }
 
         $this->render('admin/products/form', [
-            'product' => ['sort_order' => 1, 'is_active' => 1, 'is_featured' => 0],
+            'product' => ['sort_order' => 1, 'is_active' => 1, 'is_featured' => 0, 'price' => 150000.00],
             'categories' => $categories,
             'isEdit' => false
         ]);
@@ -131,6 +158,11 @@ class ProductController extends Controller {
             $model = trim($_POST['model'] ?? '');
             $name = trim($_POST['name'] ?? '');
             $description = trim($_POST['description'] ?? '');
+            $price = !empty($_POST['price']) ? (float)$_POST['price'] : 150000.00;
+            $stock = isset($_POST['stock']) ? max(0, (int)$_POST['stock']) : (int)($product['stock'] ?? 10);
+            $minStock = isset($_POST['min_stock']) ? max(0, (int)$_POST['min_stock']) : (int)($product['min_stock'] ?? 2);
+            $sku = trim($_POST['sku'] ?? ($product['sku'] ?? ''));
+            $warehouseLocation = trim($_POST['warehouse_location'] ?? ($product['warehouse_location'] ?? 'Bodega Central - Santiago'));
             $sortOrder = (int)($_POST['sort_order'] ?? 0);
             $isFeatured = isset($_POST['is_featured']) ? 1 : 0;
             $isActive = isset($_POST['is_active']) ? 1 : 0;
@@ -170,12 +202,44 @@ class ProductController extends Controller {
                 }
             }
 
+            // Manejo de Ficha Técnica (Documento PDF / DOC / DOCX)
+            $datasheetName = $product['datasheet_pdf'] ?? null;
+            if (!empty($_POST['remove_datasheet']) && $_POST['remove_datasheet'] == '1') {
+                if ($datasheetName && file_exists(ASSETS_PATH . '/docs/datasheets/' . $datasheetName)) {
+                    @unlink(ASSETS_PATH . '/docs/datasheets/' . $datasheetName);
+                }
+                $datasheetName = null;
+            } elseif (isset($_FILES['datasheet_pdf']) && $_FILES['datasheet_pdf']['error'] === UPLOAD_ERR_OK) {
+                $docTmp = $_FILES['datasheet_pdf']['tmp_name'];
+                $docExt = strtolower(pathinfo($_FILES['datasheet_pdf']['name'], PATHINFO_EXTENSION));
+                $allowedDocs = ['pdf', 'doc', 'docx'];
+                if (in_array($docExt, $allowedDocs)) {
+                    if ($datasheetName && file_exists(ASSETS_PATH . '/docs/datasheets/' . $datasheetName)) {
+                        @unlink(ASSETS_PATH . '/docs/datasheets/' . $datasheetName);
+                    }
+                    $datasheetName = 'ficha_' . preg_replace('/[^a-zA-Z0-9_-]/', '_', strtolower($model)) . '_' . time() . '.' . $docExt;
+                    $destDir = ASSETS_PATH . '/docs/datasheets';
+                    if (!is_dir($destDir)) {
+                        mkdir($destDir, 0755, true);
+                    }
+                    move_uploaded_file($docTmp, $destDir . '/' . $datasheetName);
+                }
+            } elseif (!empty($_POST['existing_datasheet_pdf'])) {
+                $datasheetName = $_POST['existing_datasheet_pdf'];
+            }
+
             $productModel->update($id, [
                 'category_id' => $categoryId,
                 'model' => $model,
+                'sku' => $sku,
                 'name' => $name,
                 'description' => $description,
+                'price' => $price,
+                'stock' => $stock,
+                'min_stock' => $minStock,
+                'warehouse_location' => $warehouseLocation,
                 'image' => $imageName,
+                'datasheet_pdf' => $datasheetName,
                 'specs_json' => json_encode($specs, JSON_UNESCAPED_UNICODE),
                 'sort_order' => $sortOrder,
                 'is_featured' => $isFeatured,

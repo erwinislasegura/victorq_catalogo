@@ -5,6 +5,7 @@
     "model": "Serie MXTA",
     "name": "Llave de Torque Hidráulica de Cuadrante",
     "image": "prod_01_llaves.png",
+    "datasheet_pdf": "ficha_serie_mxta.pdf",
     "specs": "{'Torque':'200 – 37.000 Lb-ple','Cuadrante':'3/4\" a 2-1/2\"','Presión':'700 bar','Modelos':'1,3,5,8,10,20,25,35 MXTA'}"
   },
   {

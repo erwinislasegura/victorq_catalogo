@@ -8,11 +8,9 @@ class CatalogController extends Controller {
     public function index(): void {
         $categoryModel = new Category();
         $productModel = new Product();
-        $tableModel = new TechnicalTable();
 
         $categories = $categoryModel->getActiveCategories();
         $products = $productModel->getActiveByCategory();
-        $tables = $tableModel->getAllWithCategory();
 
         // Si la base de datos aún no está poblada, cargar datos iniciales de respaldo
         if (empty($categories)) {
@@ -33,6 +31,7 @@ class CatalogController extends Controller {
                         'model' => $p['model'],
                         'name' => $p['name'],
                         'category_slug' => $p['cat_slug'],
+                        'category_name' => ucfirst($p['cat_slug']),
                         'image' => $p['image'],
                         'specs_json' => $p['specs']
                     ];
@@ -40,15 +39,132 @@ class CatalogController extends Controller {
             }
         }
 
-        if (empty($tables)) {
-            $tblFile = ROOT_PATH . '/database/extracted_tables.json';
-            if (file_exists($tblFile)) {
-                $tables = json_decode(file_get_contents($tblFile), true) ?: [];
+        // Renderizar vista del catálogo público
+        require_once VIEWS_PATH . '/frontend/catalog.php';
+    }
+
+    public function category(string $slugOrId = ''): void {
+        $categoryModel = new Category();
+        $productModel = new Product();
+
+        $param = !empty($slugOrId) ? $slugOrId : ($_GET['slug'] ?? $_GET['cat'] ?? $_GET['id'] ?? '');
+        $category = null;
+
+        if (!empty($param)) {
+            $category = $categoryModel->findBySlugOrId($param);
+        }
+
+        // Fallback desde JSON si la BD no está sincronizada
+        if (!$category) {
+            $catFile = ROOT_PATH . '/database/extracted_categories.json';
+            if (file_exists($catFile)) {
+                $rawCats = json_decode(file_get_contents($catFile), true) ?: [];
+                foreach ($rawCats as $c) {
+                    if ($c['slug'] === $param || (string)($c['id'] ?? '') === (string)$param) {
+                        $category = $c;
+                        break;
+                    }
+                }
             }
         }
 
-        // Renderizar vista del catálogo público
-        require_once VIEWS_PATH . '/frontend/catalog.php';
+        if (!$category) {
+            header('Location: ' . BASE_URL . '/index.php#departamentos');
+            exit;
+        }
+
+        $allCategories = $categoryModel->getActiveCategories();
+        if (empty($allCategories)) {
+            $catFile = ROOT_PATH . '/database/extracted_categories.json';
+            if (file_exists($catFile)) {
+                $allCategories = json_decode(file_get_contents($catFile), true) ?: [];
+            }
+        }
+
+        $products = $productModel->getActiveByCategory($category['slug']);
+        if (empty($products)) {
+            $prodFile = ROOT_PATH . '/database/extracted_products.json';
+            if (file_exists($prodFile)) {
+                $rawProds = json_decode(file_get_contents($prodFile), true) ?: [];
+                $products = [];
+                foreach ($rawProds as $p) {
+                    if ($p['cat_slug'] === $category['slug']) {
+                        $products[] = [
+                            'id' => $p['id'],
+                            'model' => $p['model'],
+                            'name' => $p['name'],
+                            'description' => $p['description'] ?? '',
+                            'category_slug' => $p['cat_slug'],
+                            'category_name' => $category['name'],
+                            'image' => $p['image'],
+                            'specs_json' => $p['specs']
+                        ];
+                    }
+                }
+            }
+        }
+
+        // Renderizar vista de la categoría
+        require_once VIEWS_PATH . '/frontend/category_products.php';
+    }
+
+    public function detail(int $productId = 0): void {
+        $productModel = new Product();
+        $categoryModel = new Category();
+
+        $id = $productId > 0 ? $productId : (int)($_GET['id'] ?? 0);
+        $product = null;
+
+        if ($id > 0) {
+            $product = $productModel->findWithCategory($id);
+        }
+
+        // Fallback desde JSON si la base de datos está vacía o el producto no se encontró en MySQL
+        if (!$product) {
+            $prodFile = ROOT_PATH . '/database/extracted_products.json';
+            if (file_exists($prodFile)) {
+                $rawProds = json_decode(file_get_contents($prodFile), true) ?: [];
+                foreach ($rawProds as $p) {
+                    if ((int)$p['id'] === $id || $p['model'] === ($_GET['slug'] ?? '') || $p['model'] === ($_GET['model'] ?? '')) {
+                        $product = [
+                            'id' => $p['id'],
+                            'category_id' => 1,
+                            'model' => $p['model'],
+                            'name' => $p['name'],
+                            'description' => $p['description'] ?? 'Herramienta de alto rendimiento para aplicaciones críticas de torque y potencia hidráulica de 700 bar en faenas mineras e industriales.',
+                            'category_slug' => $p['cat_slug'],
+                            'category_name' => ucfirst($p['cat_slug']),
+                            'image' => $p['image'],
+                            'datasheet_pdf' => $p['datasheet_pdf'] ?? null,
+                            'specs_json' => $p['specs'],
+                            'is_featured' => 1,
+                            'is_active' => 1
+                        ];
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (!$product) {
+            header('Location: ' . BASE_URL . '/index.php#catalogo');
+            exit;
+        }
+
+        // Decodificar especificaciones si vienen como string JSON
+        if (is_string($product['specs_json'] ?? null)) {
+            $product['specs'] = json_decode($product['specs_json'], true) ?: [];
+        } elseif (is_array($product['specs_json'] ?? null)) {
+            $product['specs'] = $product['specs_json'];
+        } else {
+            $product['specs'] = [];
+        }
+
+        $categories = $categoryModel->getActiveCategories();
+        $relatedProducts = $productModel->getRelatedProducts((int)($product['category_id'] ?? 0), (int)$product['id'], 4);
+
+        // Renderizar vista de detalle de producto
+        require_once VIEWS_PATH . '/frontend/product_detail.php';
     }
 
     public function quote(): void {

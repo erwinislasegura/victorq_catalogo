@@ -20,6 +20,13 @@ class Router {
             'role' => 'RoleController',
             'menu' => 'MenuController',
             'catalog' => 'CatalogController',
+            'payment_config' => 'PaymentConfigController',
+            'payment' => 'PaymentConfigController',
+            'flow' => 'PaymentConfigController',
+            'checkout' => 'CheckoutController',
+            'contact' => 'ContactController',
+            'contacts' => 'ContactController',
+            'inventory' => 'InventoryController',
         ];
         
         $controllerName = $controllerMap[strtolower($c)] ?? $defaultController;

@@ -66,7 +66,7 @@
         <li><a href="#departamentos">Líneas de Productos</a></li>
         <li><a href="#catalogo">Catálogo</a></li>
         <li><a href="#recursos">Herramientas de Selección</a></li>
-        <li><a href="#cotizar">Cotizador RFQ</a></li>
+        <li><a href="<?= BASE_URL ?>/contact.php">Contacto</a></li>
       </ul>
 
       <div class="nav-actions-group">
@@ -74,9 +74,13 @@
           <i class="bi bi-search"></i>
           <input type="text" id="buscador-global" placeholder="Buscar modelo o serie...">
         </div>
-        <a class="btn btn-enerpac-yellow" href="#cotizar">
-          <i class="bi bi-file-earmark-text-fill"></i>
-          <span>Cotizar Equipos</span>
+        <a class="btn btn-victorq-dark" href="<?= BASE_URL ?>/cart.php" style="padding: 8px 14px; font-size: 0.78rem;">
+          <i class="bi bi-cart3 text-warning"></i>
+          <span>Carro (<strong class="cart-count-badge">0</strong>)</span>
+        </a>
+        <a class="btn btn-victorq-primary" href="<?= BASE_URL ?>/contact.php" style="padding: 8px 14px; font-size: 0.78rem;">
+          <i class="bi bi-telephone-fill"></i>
+          <span>Contacto</span>
         </a>
       </div>
     </nav>
@@ -100,9 +104,9 @@
           <span>Explorar Catálogo</span>
           <i class="bi bi-arrow-right"></i>
         </a>
-        <a class="btn btn-enerpac-outline-white" href="#cotizar">
-          <i class="bi bi-envelope-fill"></i>
-          <span>Contactar Ingeniero</span>
+        <a class="btn btn-enerpac-outline-white" href="<?= BASE_URL ?>/contact.php">
+          <i class="bi bi-telephone-fill"></i>
+          <span>Asistencia en Faena</span>
         </a>
       </div>
 
@@ -139,7 +143,7 @@
 
     <div class="dept-grid">
       <!-- 1. Llaves de Torque -->
-      <div class="dept-card" onclick="filtrarCategoria('llaves')">
+      <a href="<?= BASE_URL ?>/category.php?slug=llaves" class="dept-card text-decoration-none">
         <div class="dept-img-container">
           <img src="<?= ASSETS_URL ?>/img/products/prod_01_llaves.png" alt="Llaves de Torque">
         </div>
@@ -147,10 +151,10 @@
           <h4>LLAVES DE TORQUE HIDRÁULICAS</h4>
           <i class="bi bi-arrow-right-square-fill"></i>
         </div>
-      </div>
+      </a>
 
       <!-- 2. Bombas y Centrales -->
-      <div class="dept-card" onclick="filtrarCategoria('bombas')">
+      <a href="<?= BASE_URL ?>/category.php?slug=bombas" class="dept-card text-decoration-none">
         <div class="dept-img-container">
           <img src="<?= ASSETS_URL ?>/img/products/prod_05_bombas.png" alt="Bombas 700 Bar">
         </div>
@@ -158,10 +162,10 @@
           <h4>BOMBAS Y CENTRALES 700 BAR</h4>
           <i class="bi bi-arrow-right-square-fill"></i>
         </div>
-      </div>
+      </a>
 
       <!-- 3. Cilindros y Gatas -->
-      <div class="dept-card" onclick="filtrarCategoria('cilindros')">
+      <a href="<?= BASE_URL ?>/category.php?slug=cilindros" class="dept-card text-decoration-none">
         <div class="dept-img-container">
           <img src="<?= ASSETS_URL ?>/img/products/prod_09_cilindros.png" alt="Cilindros de Levante">
         </div>
@@ -169,10 +173,10 @@
           <h4>CILINDROS Y GATAS DE LEVANTE</h4>
           <i class="bi bi-arrow-right-square-fill"></i>
         </div>
-      </div>
+      </a>
 
       <!-- 4. Corta Tuercas -->
-      <div class="dept-card" onclick="filtrarCategoria('cortatuercas')">
+      <a href="<?= BASE_URL ?>/category.php?slug=cortatuercas" class="dept-card text-decoration-none">
         <div class="dept-img-container">
           <img src="<?= ASSETS_URL ?>/img/products/prod_19_cortatuercas.png" alt="Corta Tuercas">
         </div>
@@ -180,10 +184,10 @@
           <h4>CORTA TUERCAS HIDRÁULICOS</h4>
           <i class="bi bi-arrow-right-square-fill"></i>
         </div>
-      </div>
+      </a>
 
       <!-- 5. Herramientas de Bridas -->
-      <div class="dept-card" onclick="filtrarCategoria('bridas')">
+      <a href="<?= BASE_URL ?>/category.php?slug=bridas" class="dept-card text-decoration-none">
         <div class="dept-img-container">
           <img src="<?= ASSETS_URL ?>/img/products/prod_16_bridas.png" alt="Herramientas de Bridas">
         </div>
@@ -191,10 +195,10 @@
           <h4>HERRAMIENTAS PARA BRIDAS</h4>
           <i class="bi bi-arrow-right-square-fill"></i>
         </div>
-      </div>
+      </a>
 
       <!-- 6. Extractores y Prensas -->
-      <div class="dept-card" onclick="filtrarCategoria('extractores')">
+      <a href="<?= BASE_URL ?>/category.php?slug=extractores" class="dept-card text-decoration-none">
         <div class="dept-img-container">
           <img src="<?= ASSETS_URL ?>/img/products/prod_21_extractores.png" alt="Extractores">
         </div>
@@ -202,7 +206,7 @@
           <h4>EXTRACTORES Y PRENSAS</h4>
           <i class="bi bi-arrow-right-square-fill"></i>
         </div>
-      </div>
+      </a>
     </div>
   </div>
 </section>
@@ -245,7 +249,7 @@
           <h4>DIMENSIONAMIENTO DE CENTRALES 700 BAR</h4>
           <p>Cálculo de caudales por etapa para optimizar tiempos de ciclo en apriete continuo de bridas.</p>
         </div>
-        <a href="#cotizar" class="tool-link">Solicitar Asesoría <i class="bi bi-arrow-right"></i></a>
+        <a href="<?= BASE_URL ?>/contact.php" class="tool-link">Solicitar Asesoría <i class="bi bi-arrow-right"></i></a>
       </div>
     </div>
   </div>
@@ -277,13 +281,19 @@
         $specs = is_array($p['specs_json']) ? $p['specs_json'] : (json_decode($p['specs_json'] ?? '{}', true) ?: []);
       ?>
         <div class="prod-item-card" data-cat="<?= htmlspecialchars($p['category_slug'] ?? 'llaves') ?>" data-search="<?= strtolower(htmlspecialchars($p['model'] . ' ' . $p['name'])) ?>">
-          <div class="prod-item-img">
+          <a href="<?= BASE_URL ?>/product.php?id=<?= (int)$p['id'] ?>" class="prod-item-img text-decoration-none">
             <img src="<?= ASSETS_URL ?>/img/products/<?= htmlspecialchars($p['image']) ?>" alt="<?= htmlspecialchars($p['name']) ?>" loading="lazy" onerror="this.src='<?= ASSETS_URL ?>/img/logo.png'">
-          </div>
+          </a>
           <div class="prod-item-body">
-            <span class="prod-cat-badge"><?= htmlspecialchars($p['category_name'] ?? ucfirst($p['category_slug'] ?? 'Equipo')) ?></span>
+            <a href="<?= BASE_URL ?>/category.php?slug=<?= htmlspecialchars($p['category_slug'] ?? 'llaves') ?>" class="prod-cat-badge text-decoration-none">
+              <?= htmlspecialchars($p['category_name'] ?? ucfirst($p['category_slug'] ?? 'Equipo')) ?>
+            </a>
             <div class="prod-model-title"><?= htmlspecialchars($p['model']) ?></div>
-            <h3><?= htmlspecialchars($p['name']) ?></h3>
+            <h3>
+              <a href="<?= BASE_URL ?>/product.php?id=<?= (int)$p['id'] ?>" style="color: inherit; text-decoration: none;">
+                <?= htmlspecialchars($p['name']) ?>
+              </a>
+            </h3>
             
             <ul class="prod-spec-table">
               <?php $c = 0; foreach ($specs as $k => $v): if ($c++ >= 4) break; ?>
@@ -295,12 +305,16 @@
             </ul>
 
             <div class="prod-actions">
-              <button type="button" class="btn-action-spec" onclick="abrirFicha(<?= (int)$p['id'] ?>)">
-                <i class="bi bi-file-earmark-text"></i> Ficha Técnica
+              <button type="button" class="btn-action-cart" onclick="agregarAlCarro(<?= (int)$p['id'] ?>)">
+                <i class="bi bi-cart-plus-fill"></i>
+                <span>Añadir al Carrito</span>
               </button>
-              <button type="button" class="btn-action-quote" onclick="seleccionarProductoCotizar('<?= htmlspecialchars($p['model']) ?> - <?= htmlspecialchars($p['name']) ?>')">
-                <i class="bi bi-cart-plus"></i> Cotizar
-              </button>
+              <?php if (!empty($p['datasheet_pdf'])): ?>
+                <a href="<?= ASSETS_URL ?>/docs/datasheets/<?= htmlspecialchars($p['datasheet_pdf']) ?>" target="_blank" class="btn-action-spec">
+                  <i class="bi bi-file-earmark-pdf-fill text-danger"></i>
+                  <span>Ver Ficha Técnica (PDF)</span>
+                </a>
+              <?php endif; ?>
             </div>
           </div>
         </div>
@@ -319,7 +333,7 @@
         Suministramos sistemas hidráulicos síncronos de levante para puentes, palas mineras, molinos SAG y reactores petroquímicos con control de presión milimétrico y certificación de carga.
       </p>
       <div class="d-flex gap-3">
-        <a class="btn btn-enerpac-yellow" href="#cotizar">
+        <a class="btn btn-enerpac-yellow" href="<?= BASE_URL ?>/contact.php">
           <span>Solicitar Asesoría en Terreno</span>
           <i class="bi bi-arrow-right"></i>
         </a>
@@ -328,161 +342,8 @@
   </div>
 </section>
 
-
-<!-- QUOTATION & RFQ SECTION (Split Form with Industrial Background) -->
-<section class="section-rfq-inquiry" id="cotizar">
-  <div class="contenedor">
-    <div class="rfq-grid-2">
-      <!-- Left Info -->
-      <div class="rfq-info-col">
-        <div class="hero-tag mb-2">Solicitud de Cotización (RFQ)</div>
-        <h2>SOLICITE ASESORÍA TÉCNICA Y COTIZACIÓN INMEDIATA</h2>
-        <p>
-          Complete el formulario con el requerimiento de su proyecto o faena y un ingeniero de aplicaciones VICTORQ se pondrá en contacto para dimensionar la mejor solución técnica.
-        </p>
-
-        <ul class="rfq-contact-box">
-          <li>
-            <i class="bi bi-geo-alt-fill"></i>
-            <div>
-              <strong class="d-block text-white">Casa Matriz & Laboratorio de Calibración</strong>
-              <span>Santiago, Chile (Cobertura y asistencia nacional en faena)</span>
-            </div>
-          </li>
-          <li>
-            <i class="bi bi-telephone-fill"></i>
-            <div>
-              <strong class="d-block text-white">Línea Directa de Ingeniería</strong>
-              <span><?= APP_PHONE ?></span>
-            </div>
-          </li>
-          <li>
-            <i class="bi bi-envelope-fill"></i>
-            <div>
-              <strong class="d-block text-white">Correo Comercial & Licitaciones</strong>
-              <span><?= APP_EMAIL ?></span>
-            </div>
-          </li>
-          <li>
-            <i class="bi bi-patch-check-fill"></i>
-            <div>
-              <strong class="d-block text-white">Calibración Certificada ISO 9001:2015</strong>
-              <span>Protocolos y certificados de trazabilidad individualizados</span>
-            </div>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Right Form -->
-      <div class="rfq-form-panel">
-        <h4 class="fw-bold mb-3" style="color: #000000; border-bottom: 2px solid var(--enerpac-yellow); padding-bottom: 8px;">
-          FORMULARIO DE COTIZACIÓN TÉCNICA
-        </h4>
-        <form id="form-cotizacion" method="POST">
-          <div class="form-2col">
-            <div class="form-group-enerpac">
-              <label for="nombre">Nombre Completo *</label>
-              <input type="text" id="nombre" name="nombre" required placeholder="Juan Pérez">
-            </div>
-            <div class="form-group-enerpac">
-              <label for="empresa">Empresa / Faena *</label>
-              <input type="text" id="empresa" name="empresa" required placeholder="Minera / Contratista">
-            </div>
-          </div>
-
-          <div class="form-2col">
-            <div class="form-group-enerpac">
-              <label for="email">Correo Electrónico *</label>
-              <input type="email" id="email" name="email" required placeholder="juan.perez@empresa.cl">
-            </div>
-            <div class="form-group-enerpac">
-              <label for="telefono">Teléfono / Celular *</label>
-              <input type="text" id="telefono" name="telefono" required placeholder="+56 9 1234 5678">
-            </div>
-          </div>
-
-          <div class="form-group-enerpac">
-            <label for="categoria">Línea o Equipo de Interés</label>
-            <select id="categoria" name="categoria">
-              <option value="Consulta General">-- Seleccionar Línea de Equipos --</option>
-              <?php foreach ($categories as $cat): ?>
-                <option value="<?= htmlspecialchars($cat['name']) ?>"><?= htmlspecialchars($cat['name']) ?></option>
-              <?php endforeach; ?>
-            </select>
-          </div>
-
-          <div class="form-group-enerpac">
-            <label for="mensaje">Detalle del Requerimiento Técnico</label>
-            <textarea id="mensaje" name="mensaje" rows="4" placeholder="Indique modelo de interés, rango de torque requerido, diámetro de pernos, tonelaje o condiciones de faena..."></textarea>
-          </div>
-
-          <button type="submit" class="btn btn-enerpac-yellow w-100" id="btn-enviar-cotizacion" style="padding: 14px;">
-            <i class="bi bi-send-fill"></i>
-            <span>Enviar Solicitud de Cotización</span>
-          </button>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- GLOBAL CORPORATE FOOTER -->
-<footer class="global-enerpac-footer">
-  <div class="contenedor">
-    <div class="footer-4col">
-      <div>
-        <img src="<?= ASSETS_URL ?>/img/logo.png" alt="<?= APP_NAME ?>" height="38" class="mb-3" style="filter: brightness(0) invert(1);">
-        <p class="text-xs text-muted mb-3">
-          Especialistas en soluciones integrales de torque de alta precisión, potencia hidráulica de 700 bar y apernado crítico para la gran industria y minería.
-        </p>
-        <div class="text-xs text-white-50">
-          <i class="bi bi-shield-check text-warning me-1"></i> Calibración certificada bajo norma ISO 9001:2015.
-        </div>
-      </div>
-
-      <div>
-        <h4>Líneas de Equipos</h4>
-        <ul>
-          <li><a href="#catalogo">Llaves de Torque Cuadrante</a></li>
-          <li><a href="#catalogo">Llaves de Bajo Perfil</a></li>
-          <li><a href="#catalogo">Bombas y Centrales 700 bar</a></li>
-          <li><a href="#catalogo">Cilindros de Levante Pesado</a></li>
-          <li><a href="#catalogo">Multiplicadores de Torque</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>Herramientas Especiales</h4>
-        <ul>
-          <li><a href="#catalogo">Separadores de Bridas</a></li>
-          <li><a href="#catalogo">Corta Tuercas Hidráulicos</a></li>
-          <li><a href="#catalogo">Extractores Autocentrantes</a></li>
-          <li><a href="#catalogo">Prensas de Taller</a></li>
-          <li><a href="#catalogo">Manómetros y Mangueras 700 bar</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h4>Enlaces Corporativos</h4>
-        <ul>
-          <li><a href="<?= ADMIN_URL ?>/"><i class="bi bi-lock-fill text-warning me-1"></i> Acceso Portal Backend</a></li>
-          <li><a href="#catalogo">Catálogo Completo</a></li>
-          <li><a href="#recursos">Herramientas de Selección</a></li>
-          <li><a href="#cotizar">Contacto Directo</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-bottom-row">
-      <div>
-        &copy; <?= date('Y') ?> <strong><?= APP_COMPANY ?></strong> — Todos los derechos reservados.
-      </div>
-      <div>
-        Diseño Industrial Inspirado en Estándares Globales de Potencia Hidráulica.
-      </div>
-    </div>
-  </div>
-</footer>
+<!-- GLOBAL CORPORATE FOOTER (CENTRALIZADO) -->
+<?php require VIEWS_PATH . '/layouts/public_footer.php'; ?>
 
 <!-- MODAL FICHA TECNICA -->
 <div class="overlay-modal" id="overlay-modal">

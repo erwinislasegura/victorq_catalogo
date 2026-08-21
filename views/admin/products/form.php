@@ -15,9 +15,16 @@ if (!empty($product['specs_json'])) {
             <i class="bi <?= $isEdit ? 'bi-pencil-square text-primary' : 'bi-plus-circle text-success' ?>"></i>
             <span><?= $pageTitle ?></span>
         </h6>
-        <a href="<?= ADMIN_URL ?>/?c=product" class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1 text-xs">
-            <i class="bi bi-arrow-left"></i> <span>Volver a Productos</span>
-        </a>
+        <div class="d-flex align-items-center gap-2">
+            <?php if ($isEdit && !empty($product['id'])): ?>
+                <a href="<?= BASE_URL ?>/product.php?id=<?= (int)$product['id'] ?>" target="_blank" class="btn btn-sm btn-outline-info d-flex align-items-center gap-1 text-xs">
+                    <i class="bi bi-box-arrow-up-right"></i> <span>Ver Ficha Pública</span>
+                </a>
+            <?php endif; ?>
+            <a href="<?= ADMIN_URL ?>/?c=product" class="btn btn-sm btn-outline-secondary d-flex align-items-center gap-1 text-xs">
+                <i class="bi bi-arrow-left"></i> <span>Volver a Productos</span>
+            </a>
+        </div>
     </div>
 
     <div class="card-body p-4">
@@ -54,8 +61,8 @@ if (!empty($product['specs_json'])) {
                     <textarea class="form-control form-control-sm" id="description" name="description" rows="3" placeholder="Detalles de aplicación y características técnicas..."><?= htmlspecialchars($product['description'] ?? '') ?></textarea>
                 </div>
 
-                <!-- Imagen & Configuración -->
-                <div class="col-md-4">
+                <!-- Imagen del Producto -->
+                <div class="col-md-6">
                     <label class="form-label text-xs fw-semibold text-muted text-uppercase">Imagen del Producto</label>
                     <?php if ($isEdit && !empty($product['image'])): ?>
                         <div class="d-flex align-items-center gap-2 mb-2 p-2 border rounded bg-light">
@@ -65,26 +72,76 @@ if (!empty($product['specs_json'])) {
                     <?php endif; ?>
                     <input type="file" class="form-control form-control-sm" name="image" accept="image/*">
                     <input type="hidden" name="existing_image" value="<?= htmlspecialchars($product['image'] ?? 'default.png') ?>">
-                    <small class="text-muted text-xxs d-block mt-1">Formatos: PNG, JPG, WEBP. Tamaño recomendado 600x400 px.</small>
+                    <small class="text-muted text-xxs d-block mt-1">Formatos: PNG, JPG, WEBP. Fondo blanco o transparente.</small>
                 </div>
 
-                <!-- Orden y Estados -->
-                <div class="col-md-4">
-                    <label for="sort_order" class="form-label text-xs fw-semibold text-muted text-uppercase">Orden en Catálogo</label>
-                    <input type="number" class="form-control form-control-sm" id="sort_order" name="sort_order" value="<?= (int)($product['sort_order'] ?? 1) ?>" min="0">
+                <!-- Documento Ficha Técnica (PDF) -->
+                <div class="col-md-6">
+                    <label class="form-label text-xs fw-semibold text-muted text-uppercase">Documento de Ficha Técnica (PDF / Catálogo)</label>
+                    <?php if ($isEdit && !empty($product['datasheet_pdf'])): ?>
+                        <div class="d-flex align-items-center justify-content-between gap-2 mb-2 p-2 border rounded bg-light">
+                            <div class="d-flex align-items-center gap-2 text-truncate">
+                                <i class="bi bi-file-earmark-pdf-fill text-danger fs-5"></i>
+                                <span class="text-xs fw-bold text-dark text-truncate"><?= htmlspecialchars($product['datasheet_pdf']) ?></span>
+                            </div>
+                            <div class="d-flex align-items-center gap-2">
+                                <a href="<?= ASSETS_URL ?>/docs/datasheets/<?= htmlspecialchars($product['datasheet_pdf']) ?>" target="_blank" class="btn btn-xs btn-outline-primary">
+                                    <i class="bi bi-eye"></i> Ver
+                                </a>
+                                <div class="form-check form-check-inline mb-0">
+                                    <input class="form-check-input" type="checkbox" name="remove_datasheet" value="1" id="remove_datasheet">
+                                    <label class="form-check-label text-xxs text-danger fw-semibold" for="remove_datasheet">Quitar</label>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+                    <input type="file" class="form-control form-control-sm" name="datasheet_pdf" accept=".pdf,.doc,.docx,application/pdf">
+                    <input type="hidden" name="existing_datasheet_pdf" value="<?= htmlspecialchars($product['datasheet_pdf'] ?? '') ?>">
+                    <small class="text-muted text-xxs d-block mt-1">Formatos: PDF, DOC, DOCX (Máx. 25MB). Estará disponible para descarga en la web.</small>
                 </div>
 
-                <div class="col-md-4 d-flex align-items-center gap-3 pt-3">
-                    <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active" value="1" <?= (!isset($product['is_active']) || $product['is_active']) ? 'checked' : '' ?>>
-                        <label class="form-check-label text-xs fw-semibold text-dark" for="is_active">Producto Activo en Web</label>
+                <!-- Precio de Venta (CLP) -->
+                <div class="col-md-3">
+                    <label for="price" class="form-label text-xs fw-semibold text-muted text-uppercase">Precio Unitario ($ CLP) *</label>
+                    <div class="input-group input-group-sm">
+                        <span class="input-group-text bg-light text-muted">$</span>
+                        <input type="number" class="form-control form-control-sm font-monospace fw-bold text-primary" id="price" name="price" value="<?= (float)($product['price'] ?? 150000) ?>" min="0" step="1000" placeholder="150000" required>
                     </div>
                 </div>
 
+                <!-- Stock Actual -->
+                <div class="col-md-2">
+                    <label for="stock" class="form-label text-xs fw-semibold text-muted text-uppercase">Stock Actual *</label>
+                    <input type="number" class="form-control form-control-sm font-monospace text-center fw-bold" id="stock" name="stock" value="<?= (int)($product['stock'] ?? 10) ?>" min="0" required>
+                </div>
+
+                <!-- Stock Mínimo (Alerta) -->
+                <div class="col-md-2">
+                    <label for="min_stock" class="form-label text-xs fw-semibold text-muted text-uppercase">Stock Mínimo</label>
+                    <input type="number" class="form-control form-control-sm font-monospace text-center" id="min_stock" name="min_stock" value="<?= (int)($product['min_stock'] ?? 2) ?>" min="0">
+                </div>
+
+                <!-- Ubicación en Bodega -->
+                <div class="col-md-3">
+                    <label for="warehouse_location" class="form-label text-xs fw-semibold text-muted text-uppercase">Ubicación en Bodega</label>
+                    <input type="text" class="form-control form-control-sm" id="warehouse_location" name="warehouse_location" value="<?= htmlspecialchars($product['warehouse_location'] ?? 'Bodega Central - Santiago') ?>" placeholder="Bodega Central / Rack A-1">
+                </div>
+
+                <!-- SKU / Código de Almacén -->
+                <div class="col-md-2">
+                    <label for="sku" class="form-label text-xs fw-semibold text-muted text-uppercase">Código SKU</label>
+                    <input type="text" class="form-control form-control-sm font-monospace" id="sku" name="sku" value="<?= htmlspecialchars($product['sku'] ?? '') ?>" placeholder="SKU-1001">
+                </div>
+
+                <!-- Switches de Estado -->
                 <div class="col-md-4 d-flex align-items-center gap-3 pt-3">
                     <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="is_active" name="is_active" value="1" <?= (!isset($product['is_active']) || $product['is_active']) ? 'checked' : '' ?>>
+                        <label class="form-check-label text-xs fw-semibold text-dark" for="is_active">Activo en Web</label>
+                    </div>
+                    <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" value="1" <?= (!empty($product['is_featured'])) ? 'checked' : '' ?>>
-                        <label class="form-check-label text-xs fw-semibold text-dark" for="is_featured">Destacado en Portada</label>
+                        <label class="form-check-label text-xs fw-semibold text-dark" for="is_featured">Destacado</label>
                     </div>
                 </div>
 

@@ -6,6 +6,35 @@
 class Menu extends Model {
     protected string $table = 'menus';
 
+    public function __construct() {
+        parent::__construct();
+        if ($this->db) {
+            $this->ensurePaymentMenus();
+        }
+    }
+
+    private function ensurePaymentMenus(): void {
+        try {
+            $existing = $this->where("module_code = 'payment_gateways' LIMIT 1");
+            if (empty($existing)) {
+                $sql = "INSERT INTO `menus` (`parent_id`, `title`, `url`, `icon`, `module_code`, `badge`, `badge_class`, `sort_order`, `is_active`) 
+                        VALUES (NULL, 'Pasarela Flow.cl', '?c=payment_config', 'bi-credit-card-2-front', 'payment_gateways', 'Flow', 'bg-success', 6, 1)";
+                $this->db->exec($sql);
+                $menuId = (int)$this->db->lastInsertId();
+
+                // Permisos automáticos para admin y supervisor
+                if ($menuId > 0) {
+                    $this->db->exec("INSERT IGNORE INTO `role_permissions` (`role_id`, `menu_id`, `can_view`, `can_create`, `can_edit`, `can_delete`) VALUES 
+                                     (1, {$menuId}, 1, 1, 1, 1),
+                                     (2, {$menuId}, 1, 0, 1, 0),
+                                     (3, {$menuId}, 1, 0, 0, 0)");
+                }
+            }
+        } catch (Exception $e) {
+            // Silencioso
+        }
+    }
+
     public function getMenusForRole(int $roleId): array {
         if (!$this->db) return [];
 

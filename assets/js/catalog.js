@@ -196,3 +196,67 @@ function seleccionarProductoCotizar(productInfo) {
         }
     }
 }
+
+// 6. Carro de Compras en Tiempo Real
+function agregarAlCarro(productId, quantity = 1) {
+    const fd = new FormData();
+    fd.append('product_id', productId);
+    fd.append('quantity', quantity);
+
+    fetch((typeof BASE_URL !== 'undefined' ? BASE_URL : '') + '/cart.php?action=add', {
+        method: 'POST',
+        body: fd,
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            actualizarContadorCarro(data.total_items);
+
+            if (typeof Swal !== 'undefined') {
+                Swal.fire({
+                    icon: 'success',
+                    title: '¡Añadido al Carro!',
+                    text: data.message,
+                    showCancelButton: true,
+                    confirmButtonText: '<i class="bi bi-cart-check-fill"></i> Ir al Carro de Compras',
+                    cancelButtonText: 'Seguir Viendo',
+                    confirmButtonColor: '#015B91',
+                    cancelButtonColor: '#0a1118'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = (typeof BASE_URL !== 'undefined' ? BASE_URL : '') + '/cart.php';
+                    }
+                });
+            } else {
+                alert(data.message);
+            }
+        } else {
+            alert(data.message || 'No fue posible agregar el producto');
+        }
+    })
+    .catch(err => {
+        console.error('Error al agregar al carro:', err);
+    });
+}
+
+function actualizarContadorCarro(total) {
+    document.querySelectorAll('.cart-count-badge, #cart-counter').forEach(el => {
+        el.textContent = total;
+    });
+}
+
+// Consultar cantidad inicial en el carro
+document.addEventListener('DOMContentLoaded', function() {
+    fetch((typeof BASE_URL !== 'undefined' ? BASE_URL : '') + '/cart.php?action=count', {
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data && typeof data.total_items !== 'undefined') {
+            actualizarContadorCarro(data.total_items);
+        }
+    })
+    .catch(() => {});
+});
+

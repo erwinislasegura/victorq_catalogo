@@ -2,18 +2,18 @@
 $pageTitle = 'Gestión de Productos';
 ?>
 <div class="card shadow-sm border-0 rounded-3 bg-white">
-    <!-- Card Header & Filters -->
-    <div class="card-header bg-white py-3 border-bottom d-flex flex-column flex-md-row align-items-md-center justify-content-between gap-2">
+    <!-- Card Header & Filters (Una sola línea ordenada) -->
+    <div class="card-header bg-white py-3 border-bottom d-flex align-items-center justify-content-between flex-wrap gap-2">
         <div class="d-flex align-items-center gap-2">
-            <h6 class="mb-0 fw-bold text-dark"><i class="bi bi-box-seam text-primary me-2"></i>Catálogo de Productos</h6>
+            <h6 class="mb-0 fw-bold text-dark d-flex align-items-center"><i class="bi bi-box-seam text-primary me-2"></i>Catálogo de Productos</h6>
             <span class="badge bg-secondary-subtle text-secondary"><?= count($products) ?> items</span>
         </div>
 
-        <div class="d-flex flex-wrap align-items-center gap-2">
+        <div class="d-flex align-items-center gap-2 flex-nowrap">
             <!-- Category Filter Dropdown -->
-            <form action="<?= ADMIN_URL ?>/" method="GET" class="d-flex align-items-center gap-1.5">
+            <form action="<?= ADMIN_URL ?>/" method="GET" class="d-inline-flex m-0">
                 <input type="hidden" name="c" value="product">
-                <select name="category_id" class="form-select form-select-sm" onchange="this.form.submit()" style="min-width: 180px;">
+                <select name="category_id" class="form-select form-select-sm" onchange="this.form.submit()" style="width: 170px;">
                     <option value="0">Todas las categorías</option>
                     <?php foreach ($categories as $cat): ?>
                         <option value="<?= $cat['id'] ?>" <?= ($selectedCategory == $cat['id']) ? 'selected' : '' ?>>
@@ -24,14 +24,14 @@ $pageTitle = 'Gestión de Productos';
             </form>
 
             <!-- Search input -->
-            <div class="input-group input-group-sm" style="max-width: 200px;">
+            <div class="input-group input-group-sm" style="width: 170px;">
                 <span class="input-group-text bg-light"><i class="bi bi-search"></i></span>
                 <input type="text" id="productSearch" class="form-control" placeholder="Buscar producto...">
             </div>
 
             <!-- Create Button -->
             <?php if (Auth::can('products', 'create')): ?>
-                <a href="<?= ADMIN_URL ?>/?c=product&a=create" class="btn btn-primary btn-sm d-flex align-items-center gap-1.5 fw-semibold">
+                <a href="<?= ADMIN_URL ?>/?c=product&a=create" class="btn btn-primary btn-sm d-inline-flex align-items-center gap-1.5 fw-bold text-nowrap">
                     <i class="bi bi-plus-lg"></i> <span>Nuevo</span>
                 </a>
             <?php endif; ?>
@@ -60,8 +60,8 @@ $pageTitle = 'Gestión de Productos';
                         ?>
                         <tr>
                             <td class="ps-3 py-2">
-                                <div class="product-thumb bg-light border rounded d-flex align-items-center justify-content-center p-1">
-                                    <img src="<?= ASSETS_URL ?>/img/products/<?= htmlspecialchars($p['image']) ?>" alt="<?= htmlspecialchars($p['name']) ?>" class="img-fluid max-h-40" onerror="this.src='<?= ASSETS_URL ?>/img/logo.png'">
+                                <div class="table-prod-thumb">
+                                    <img src="<?= ASSETS_URL ?>/img/products/<?= htmlspecialchars($p['image']) ?>" alt="<?= htmlspecialchars($p['name']) ?>" onerror="this.src='<?= ASSETS_URL ?>/img/logo.png'">
                                 </div>
                             </td>
                             <td>
@@ -69,7 +69,14 @@ $pageTitle = 'Gestión de Productos';
                             </td>
                             <td>
                                 <div class="fw-semibold text-dark"><?= htmlspecialchars($p['name']) ?></div>
-                                <small class="text-muted text-xxs">Orden: #<?= $p['sort_order'] ?></small>
+                                <div class="d-flex align-items-center gap-2 mt-1">
+                                    <small class="text-muted text-xxs">Orden: #<?= $p['sort_order'] ?></small>
+                                    <?php if (!empty($p['datasheet_pdf'])): ?>
+                                        <a href="<?= ASSETS_URL ?>/docs/datasheets/<?= htmlspecialchars($p['datasheet_pdf']) ?>" target="_blank" class="badge bg-danger-subtle text-danger border border-danger-subtle text-xxs text-decoration-none" title="Ver Ficha Técnica PDF">
+                                            <i class="bi bi-file-earmark-pdf-fill"></i> PDF
+                                        </a>
+                                    <?php endif; ?>
+                                </div>
                             </td>
                             <td>
                                 <span class="badge bg-dark-subtle text-dark border"><?= htmlspecialchars($p['category_name'] ?? 'General') ?></span>
@@ -90,6 +97,9 @@ $pageTitle = 'Gestión de Productos';
                             </td>
                             <td class="text-end pe-3">
                                 <div class="btn-group btn-group-sm">
+                                    <a href="<?= BASE_URL ?>/product.php?id=<?= $p['id'] ?>" target="_blank" class="btn btn-xs btn-outline-info" title="Ver Ficha Web Pública">
+                                        <i class="bi bi-box-arrow-up-right"></i>
+                                    </a>
                                     <?php if (Auth::can('products', 'edit')): ?>
                                         <a href="<?= ADMIN_URL ?>/?c=product&a=toggle&id=<?= $p['id'] ?>" class="btn btn-xs btn-outline-secondary" title="Cambiar Estado">
                                             <i class="bi <?= $p['is_active'] ? 'bi-toggle-on text-success' : 'bi-toggle-off text-muted' ?>"></i>
